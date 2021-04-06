@@ -1,4 +1,4 @@
 class ChatSerializer
   include JSONAPI::Serializer
-  attributes 
+  attributes
 end

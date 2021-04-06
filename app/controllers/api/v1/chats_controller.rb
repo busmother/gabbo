@@ -2,7 +2,7 @@ class Api::V1::ChatsController < ApplicationController
 
     def index
         chats = Chat.all
-        # render json: ChatSerializer.new(@chats)
+        render json: ChatSerializer.new(chats)
         render json: chats
     end
 
