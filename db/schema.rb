@@ -15,18 +15,20 @@ ActiveRecord::Schema.define(version: 2021_04_06_154234) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "conversations", force: :cascade do |t|
-    t.bigint "user_id"
+  create_table "chats", force: :cascade do |t|
+    t.bigint "sender_id"
+    t.bigint "recipient_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_conversations_on_user_id"
+    t.index ["recipient_id"], name: "index_chats_on_recipient_id"
+    t.index ["sender_id"], name: "index_chats_on_sender_id"
   end
 
   create_table "messages", force: :cascade do |t|
-    t.bigint "conversation_id"
+    t.bigint "chat_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["chat_id"], name: "index_messages_on_chat_id"
   end
 
   create_table "users", force: :cascade do |t|
