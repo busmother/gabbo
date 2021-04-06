@@ -1,4 +1,4 @@
 class ChatSerializer
   include JSONAPI::Serializer
-  attributes
+  attributes :sender_id, :recipient_id, :messages
 end

@@ -2,8 +2,8 @@ class Api::V1::ChatsController < ApplicationController
 
     def index
         chats = Chat.all
+        # render json: chats
         render json: ChatSerializer.new(chats)
-        render json: chats
     end
 
     def create
@@ -11,7 +11,7 @@ class Api::V1::ChatsController < ApplicationController
         if chat.save
             render json: chat, status: :accepted
         else
-            render json: {errros: chat.errors.full_messages}, status: :unprocessible_entity
+            render json: {errors: chat.errors.full_messages}, status: :unprocessible_entity
         end
     end
 end
