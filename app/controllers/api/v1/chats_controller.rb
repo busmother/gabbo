@@ -3,7 +3,10 @@ class Api::V1::ChatsController < ApplicationController
     def index
         chats = Chat.all
         # render json: chats
-        render json: ChatSerializer.new(chats)
+        options = {
+            include: [:messages]
+        }
+        render json: ChatSerializer.new(chats, options)
     end
 
     def create
