@@ -11,9 +11,7 @@ class ChatSerializer
   def sender
     User.find(object.sender_id)
   end
-
-  # has_one :recipient, :options[:user_serializer], through: :recipient_id
-  # has_one :sender, :options[:user_serializer], through: :sender_id
+  
 end
 
 #you could create something like the below 
