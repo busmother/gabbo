@@ -4,7 +4,7 @@ Rails.application.routes.draw do
       devise_for :users
       # root 'index'
       resources :users, only: [:index, :show]
-      resources :chats, only: [:index, :create] do
+      resources :chats, only: [:index, :show, :create] do
         resources :messages, only: [:index, :create]
       end
     end

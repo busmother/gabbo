@@ -11,3 +11,5 @@ User.create(name: "user2", email: "user2@email.com", password: "password")
 User.create(name: "user3", email: "user1@email.com", password: "password")
 
 Chat.create(sender_id: 1, recipient_id: 2)
+Chat.create(sender_id: 1, recipient_id: 3)
+Chat.create(sender_id: 3, recipient_id: 2)
