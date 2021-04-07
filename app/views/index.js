@@ -17,7 +17,8 @@ function getChats() {
                 <div class = "messages">
                     <br><br><br>
                 </div>
-                <textarea class="message-compose-area"></textarea><br>
+                <br><br>
+                <textarea class="message-compose-area"></textarea><br><br><br>
                 <button> Gab </button>
             </div>`;
             document.querySelector('.grid-container').innerHTML += chatMarkup
