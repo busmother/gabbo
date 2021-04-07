@@ -3,3 +3,17 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 20px;
 }
+
+.grid-container .chat {
+    border: 2px solid grey;
+    box-shadow: 3px 4px #e04b52
+}
+
+.grid-container .chat .messages{
+    border: 2px solid yellow;
+    text-align: center;
+}
+
+.grid-container .chat .message-compose-area {
+    border: 2px solid yellow;
+}

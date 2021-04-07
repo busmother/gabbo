@@ -14,8 +14,12 @@ function getChats() {
             const chatMarkup =`
             <div class = "chat">
                 <h3>Chat between Users ${chat.attributes.recipient_id} and ${chat.attributes.sender_id}</h3>
+                <div class = "messages">
+                    <br><br><br>
+                </div>
+                <textarea class="message-compose-area"></textarea><br>
+                <button> Gab </button>
             </div>`;
-
             document.querySelector('.grid-container').innerHTML += chatMarkup
         })
     })
