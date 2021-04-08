@@ -4,6 +4,9 @@ const chatsEndPoint = "http://localhost:3000/api/v1/chats"
 document.addEventListener('DOMContentLoaded', () =>{
     fillUsersDropDown();
     getChats();
+})
+
+document.querySelector(".update-user").addEventListener("click", function() {
     setCurrentUser();
 })
 
@@ -44,11 +47,11 @@ function fillUsersDropDown(){
             usersDropdown.add(el, null);
         }
     });
+    setCurrentUser();
 }
 
 function setCurrentUser(){
-    console.log("hi")
-    selectElement = document.querySelector('#users-dropdown');
-    output = selectElement.options[selectElement.selectedIndex].value; // this is null
-    document.querySelector('.output').innerHTML = "I am the text"+output
+    let currentUser = document.querySelector('#users-dropdown').value;
+    document.querySelector('.output').innerHTML = "I am the user "+currentUser;
+    console.log(currentUser)
 }
