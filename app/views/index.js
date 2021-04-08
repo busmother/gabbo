@@ -1,12 +1,12 @@
-const endPoint = "http://localhost:3000/api/v1/chats"
-// const endPoint = "http://localhost:3000"
+const usersEndPoint = "http://localhost:3000/api/v1/users"
+const chatsEndPoint = "http://localhost:3000/api/v1/chats"
 
 document.addEventListener('DOMContentLoaded', () =>{
     getChats()
 })
 
 function getChats() {
-    fetch(endPoint)
+    fetch(chatsEndPoint)
     .then(response => response.json())
     .then(chats => {
         console.log(chats);
@@ -21,7 +21,8 @@ function getChats() {
                 <textarea class="message-compose-area"></textarea><br><br><br>
                 <button> Gab </button>
             </div>`;
-            document.querySelector('.grid-container').innerHTML += chatMarkup
-        })
+            document.querySelector('.grid-container').innerHTML += chatMarkup;
+        });
+        console.log(users);
     })
 }

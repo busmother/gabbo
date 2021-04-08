@@ -1,6 +1,12 @@
 class UserSerializer
   include JSONAPI::Serializer
-  attributes :name, :image, :index_chats_on_recipient_id, :index_chats_on_sender_id
+  attributes :name, :chats #:messages
+  # has_many :messages, through: :chats
+
+  # def messages
+  #   Message.find(object.messages)
+  # end
+
 end
 
 #might need to make a serializer for recipient and another for sender specifically
