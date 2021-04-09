@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () =>{
 
 document.querySelector(".update-user").addEventListener("click", function() {
     setCurrentUser();
+    currentUserId();
 })
 
 function getChats() {
@@ -52,12 +53,26 @@ function fillUsersDropDown(){
 }
 
 function setCurrentUser(){
-    let currentUser = document.querySelector('#users-dropdown').value;
-    document.querySelector('.output').innerHTML = "I am the user "+currentUser;
-    console.log(currentUser);
+    let currentUserName = document.querySelector('#users-dropdown').value;
+    document.querySelector('.output').innerHTML = "The current user's name is "+currentUserName;
+    // console.log(currentUserName);
     // return currentUser; //use this to find the currentUser
 }
 
-function showCurrentUser(){
-
+function currentUserId(){
+    let currentUserName = document.querySelector('#users-dropdown').value;
+    fetch(usersEndPoint)
+    .then(response => response.json())
+    .then(users => {
+        users.data.forEach(user => {
+            // console.log("currentUserName = ", currentUserName)
+            // console.log("user id = ", user.id)
+            // console.log("user = ", user)
+            // console.log("user name = ", user.attributes.name)
+            if (user.attributes.name === currentUserName){
+                // console.log("currentUser from currentUserId()", user.id)
+                return user.id
+            }
+        })
+    })
 }
