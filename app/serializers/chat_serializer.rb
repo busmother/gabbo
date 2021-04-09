@@ -11,6 +11,13 @@ class ChatSerializer
   def sender
     User.find(object.sender_id)
   end
+
+  def current_user_chats(user_id)
+    sender_chats = Chats.select { |chat| chat.sender_id == user_id}
+    recipient_chats = Chats.select { |chat| chat.recipient_id == user_id}
+    all_chats = (sender_chats+recipient_chats).uniq
+    return all_chats
+  end
   
 end
 

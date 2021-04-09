@@ -1,5 +1,7 @@
 const usersEndPoint = "http://localhost:3000/api/v1/users"
 const chatsEndPoint = "http://localhost:3000/api/v1/chats"
+let currentUser = 
+
 
 document.addEventListener('DOMContentLoaded', () =>{
     fillUsersDropDown();
@@ -47,11 +49,15 @@ function fillUsersDropDown(){
             usersDropdown.add(el, null);
         }
     });
-    setCurrentUser();
 }
 
 function setCurrentUser(){
     let currentUser = document.querySelector('#users-dropdown').value;
     document.querySelector('.output').innerHTML = "I am the user "+currentUser;
-    console.log(currentUser)
+    console.log(currentUser);
+    // return currentUser; //use this to find the currentUser
+}
+
+function showCurrentUser(){
+
 }
