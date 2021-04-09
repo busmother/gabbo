@@ -5,12 +5,12 @@ let currentUser =
 
 document.addEventListener('DOMContentLoaded', () =>{
     fillUsersDropDown();
-    getChats();
 })
 
 document.querySelector(".update-user").addEventListener("click", function() {
     setCurrentUserName();
-    currentUserId();
+    findCurrentUserId();
+    getChats();
 })
 
 function setCurrentUserName(){
@@ -21,14 +21,14 @@ function setCurrentUserName(){
 let currentUserId = "hi"
 
 function findCurrentUserId(){
-    let currentUserName = document.querySelector('#users-dropdown').value; // this duplicates part of setCurrentUser bc how to store as variable?
+    let currentUserName = document.querySelector('#users-dropdown').value;
     fetch(usersEndPoint) // you could fetch the specific user name and return the specific id
     .then(response => response.json())
     .then(users => {
         users.data.forEach(user => {
             if (user.attributes.name === currentUserName){
-                thisUserId = user.id; 
-                console.log("current user id = ", currentUserId)
+                currentUserId = user.id; 
+                console.log("inside the function current user id = ", currentUserId)
             }
         })
     })
@@ -39,7 +39,7 @@ function getChats() {
     .then(response => response.json())
     .then(chats => {
         chats.data.forEach(chat => {
-            console.log("inside getChats, thisUserId = ", currentUserId)
+            console.log("inside getChats, currentUserId = ", currentUserId)
             if (chat.attributes.sender_id === currentUserId){ 
                 console.log ("we have a match!")
             }
