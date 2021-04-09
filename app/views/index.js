@@ -9,15 +9,40 @@ document.addEventListener('DOMContentLoaded', () =>{
 })
 
 document.querySelector(".update-user").addEventListener("click", function() {
-    setCurrentUser();
+    setCurrentUserName();
     currentUserId();
 })
+
+function setCurrentUserName(){
+    let currentUserName = document.querySelector('#users-dropdown').value;
+    document.querySelector('.output').innerHTML = "The current user's name is "+currentUserName;
+}
+
+let currentUserId = "hi"
+
+function findCurrentUserId(){
+    let currentUserName = document.querySelector('#users-dropdown').value; // this duplicates part of setCurrentUser bc how to store as variable?
+    fetch(usersEndPoint) // you could fetch the specific user name and return the specific id
+    .then(response => response.json())
+    .then(users => {
+        users.data.forEach(user => {
+            if (user.attributes.name === currentUserName){
+                thisUserId = user.id; 
+                console.log("current user id = ", currentUserId)
+            }
+        })
+    })
+}
 
 function getChats() {
     fetch(chatsEndPoint)
     .then(response => response.json())
     .then(chats => {
         chats.data.forEach(chat => {
+            console.log("inside getChats, thisUserId = ", currentUserId)
+            if (chat.attributes.sender_id === currentUserId){ 
+                console.log ("we have a match!")
+            }
             const chatMarkup =`
             <div class = "chat">
                 <h3>Chat between ${chat.attributes.recipient.name} and ${chat.attributes.sender.name}</h3>
@@ -50,29 +75,4 @@ function fillUsersDropDown(){
             usersDropdown.add(el, null);
         }
     });
-}
-
-function setCurrentUser(){
-    let currentUserName = document.querySelector('#users-dropdown').value;
-    document.querySelector('.output').innerHTML = "The current user's name is "+currentUserName;
-    // console.log(currentUserName);
-    // return currentUser; //use this to find the currentUser
-}
-
-function currentUserId(){
-    let currentUserName = document.querySelector('#users-dropdown').value;
-    fetch(usersEndPoint)
-    .then(response => response.json())
-    .then(users => {
-        users.data.forEach(user => {
-            // console.log("currentUserName = ", currentUserName)
-            // console.log("user id = ", user.id)
-            // console.log("user = ", user)
-            // console.log("user name = ", user.attributes.name)
-            if (user.attributes.name === currentUserName){
-                // console.log("currentUser from currentUserId()", user.id)
-                return user.id
-            }
-        })
-    })
 }

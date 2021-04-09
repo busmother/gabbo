@@ -37,6 +37,6 @@ button {
     justify-self: center;
 }
 
-#update-user {
+.update-user {
     float: left;
 }
