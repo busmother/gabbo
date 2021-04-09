@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () =>{
 
 document.querySelector(".update-user").addEventListener("click", function() {
     setCurrentUserName();
-    findCurrentUserId();
+    setCurrentUserId();
     getChats();
 })
 
@@ -20,7 +20,7 @@ function setCurrentUserName(){
 
 let currentUserId = "hi"
 
-function findCurrentUserId(){
+function setCurrentUserId(){
     let currentUserName = document.querySelector('#users-dropdown').value;
     fetch(usersEndPoint) // you could fetch the specific user name and return the specific id
     .then(response => response.json())
@@ -28,7 +28,6 @@ function findCurrentUserId(){
         users.data.forEach(user => {
             if (user.attributes.name === currentUserName){
                 currentUserId = user.id; 
-                console.log("inside the function current user id = ", currentUserId)
             }
         })
     })
@@ -40,20 +39,21 @@ function getChats() {
     .then(chats => {
         chats.data.forEach(chat => {
             console.log("inside getChats, currentUserId = ", currentUserId)
-            if (chat.attributes.sender_id === currentUserId){ 
+            console.log("inside getChats, chat.attributes.sender_id = ", chat.attributes.sender_id)
+            if (chat.attributes.sender_id == currentUserId){ 
                 console.log ("we have a match!")
+                const chatMarkup =`
+                <div class = "chat">
+                    <h3>Chat between ${chat.attributes.recipient.name} and ${chat.attributes.sender.name}</h3>
+                    <div class = "messages">
+                        <br><br><br>
+                    </div>
+                    <br><br>
+                    <textarea class="message-compose-area"></textarea><br><br><br>
+                    <button> Gab </button>
+                </div>`;
+                document.querySelector('.grid-container').innerHTML += chatMarkup;
             }
-            const chatMarkup =`
-            <div class = "chat">
-                <h3>Chat between ${chat.attributes.recipient.name} and ${chat.attributes.sender.name}</h3>
-                <div class = "messages">
-                    <br><br><br>
-                </div>
-                <br><br>
-                <textarea class="message-compose-area"></textarea><br><br><br>
-                <button> Gab </button>
-            </div>`;
-            document.querySelector('.grid-container').innerHTML += chatMarkup;
         });
     })
 }
