@@ -57,6 +57,7 @@ function clearChats() {
 }
 
 function getChats() {
+    clearChats()
     fetch(chatsEndPoint)
     .then(response => response.json())
     .then(chats => {
@@ -64,7 +65,6 @@ function getChats() {
             console.log("inside getChats, currentUserId = ", currentUserId)
             console.log("inside getChats, chat.attributes.sender_id = ", chat.attributes.sender_id)
             if (chat.attributes.sender_id == currentUserId){ 
-                console.log ("we have a match!")
                 const chatMarkup =`
                 <div class = "chat">
                     <h3>Chat between ${chat.attributes.recipient.name} and ${chat.attributes.sender.name}</h3>
@@ -75,8 +75,25 @@ function getChats() {
                     <textarea class="message-compose-area"></textarea><br><br><br>
                     <button> Gab </button>
                 </div>`;
-                document.querySelector('.grid-container').innerHTML = chatMarkup;
+                document.querySelector('.grid-container').innerHTML += chatMarkup;
+            }
+            if (chat.attributes.recipient_id == currentUserId){
+                const chatMarkup =`
+                <div class = "chat">
+                    <h3>Chat between ${chat.attributes.recipient.name} and ${chat.attributes.sender.name}</h3>
+                    <div class = "messages">
+                        <br><br><br>
+                    </div>
+                    <br><br>
+                    <textarea class="message-compose-area"></textarea><br><br><br>
+                    <button> Gab </button>
+                </div>`;
+                document.querySelector('.grid-container').innerHTML += chatMarkup;
             }
         });
     })
+}
+
+function sendMessage(){
+
 }
