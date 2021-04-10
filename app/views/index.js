@@ -64,20 +64,7 @@ function getChats() {
         chats.data.forEach(chat => {
             console.log("inside getChats, currentUserId = ", currentUserId)
             console.log("inside getChats, chat.attributes.sender_id = ", chat.attributes.sender_id)
-            if (chat.attributes.sender_id == currentUserId){ 
-                const chatMarkup =`
-                <div class = "chat">
-                    <h3>Chat between ${chat.attributes.recipient.name} and ${chat.attributes.sender.name}</h3>
-                    <div class = "messages">
-                        <br><br><br>
-                    </div>
-                    <br><br>
-                    <textarea class="message-compose-area"></textarea><br><br><br>
-                    <button class="send-message"> Gab </button>
-                </div>`;
-                document.querySelector('.grid-container').innerHTML += chatMarkup;
-            }
-            if (chat.attributes.recipient_id == currentUserId){
+            if ((chat.attributes.sender_id == currentUserId) || (chat.attributes.recipient_id == currentUserId)){ 
                 const chatMarkup =`
                 <div class = "chat">
                     <h3>Chat between ${chat.attributes.recipient.name} and ${chat.attributes.sender.name}</h3>
@@ -94,7 +81,7 @@ function getChats() {
     })
 }
 
-function sendMessage(body, chat_id){
+function sendMessage(){
     const configurationObject = {
         method: "POST",
         headers: {
@@ -117,6 +104,11 @@ function sendMessage(body, chat_id){
         console.log("sendMessage json = ", json)
     })
 } 
+
+document.querySelector(".send-message").addEventListener("click", function() {
+    sendMessage()
+})
+
 
 // function addMessage(){
 
