@@ -1,6 +1,24 @@
 const usersEndPoint = "http://localhost:3000/api/v1/users"
 const chatsEndPoint = "http://localhost:3000/api/v1/chats"
-let currentUser = 
+
+function fillUsersDropDown(){
+    const usersDropdown = document.querySelector("#users-dropdown")
+    let allUsers = []
+    fetch(usersEndPoint)
+    .then(response => response.json())
+    .then(users =>{
+        users.data.forEach(user =>{
+            allUsers.push(user.attributes.name);
+        })
+        for (let i = 0; i < allUsers.length; i++) {
+            let optn = allUsers[i];
+            var el = document.createElement("option");
+            el.textContent = optn;
+            el.value = optn;
+            usersDropdown.add(el, null);
+        }
+    });
+}
 
 
 document.addEventListener('DOMContentLoaded', () =>{
@@ -33,6 +51,11 @@ function setCurrentUserId(){
     })
 }
 
+function clearChats() {
+    const chatMarkup = ``;
+    document.querySelector('.grid-container').innerHTML = chatMarkup;
+}
+
 function getChats() {
     fetch(chatsEndPoint)
     .then(response => response.json())
@@ -52,27 +75,8 @@ function getChats() {
                     <textarea class="message-compose-area"></textarea><br><br><br>
                     <button> Gab </button>
                 </div>`;
-                document.querySelector('.grid-container').innerHTML += chatMarkup;
+                document.querySelector('.grid-container').innerHTML = chatMarkup;
             }
         });
     })
-}
-
-function fillUsersDropDown(){
-    const usersDropdown = document.querySelector("#users-dropdown")
-    let allUsers = []
-    fetch(usersEndPoint)
-    .then(response => response.json())
-    .then(users =>{
-        users.data.forEach(user =>{
-            allUsers.push(user.attributes.name);
-        })
-        for (let i = 0; i < allUsers.length; i++) {
-            let optn = allUsers[i];
-            var el = document.createElement("option");
-            el.textContent = optn;
-            el.value = optn;
-            usersDropdown.add(el, null);
-        }
-    });
 }
