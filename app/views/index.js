@@ -73,7 +73,7 @@ function getChats() {
                     </div>
                     <br><br>
                     <textarea class="message-compose-area"></textarea><br><br><br>
-                    <button> Gab </button>
+                    <button class="send-message"> Gab </button>
                 </div>`;
                 document.querySelector('.grid-container').innerHTML += chatMarkup;
             }
@@ -86,7 +86,7 @@ function getChats() {
                     </div>
                     <br><br>
                     <textarea class="message-compose-area"></textarea><br><br><br>
-                    <button> Gab </button>
+                    <button class="send-message"> Gab </button>
                 </div>`;
                 document.querySelector('.grid-container').innerHTML += chatMarkup;
             }
@@ -94,6 +94,30 @@ function getChats() {
     })
 }
 
-function sendMessage(){
+function sendMessage(body, chat_id){
+    const configurationObject = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
 
-}
+        body: JSON.stringify({
+            "chat_id": chat_id,
+            "user_id": currentUserId,
+            "body": body,
+        })
+    }
+    return fetch("http://localhost:3000/chats", configurationObject)
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(json){
+        // addMessage(json);
+        console.log("sendMessage json = ", json)
+    })
+} 
+
+// function addMessage(){
+
+// }
