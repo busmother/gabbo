@@ -6,7 +6,7 @@
 
 .grid-container .chat {
     border: 2px solid grey;
-    box-shadow: 3px 4px #e04b52
+    box-shadow: 3px 4px  rgb(39, 209, 135)
 }
 
 .chat h3 {
@@ -27,7 +27,7 @@
 
 button {
     float: right;
-    background-color: #e04b52;
+    background-color: rgb(39, 209, 135);
     border: none;
     border-radius: 5px;
     height: 3rem;
