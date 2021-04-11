@@ -64,11 +64,9 @@ function getChats() {
     .then(chats => {
         chats.data.forEach(chat => {
          renderChat(chat);
-        //  getMessages();
         });
     })
  }
- 
 
 function renderChat(chat){
     if ((chat.attributes.sender_id.toString() === currentUserId.toString()) || (chat.attributes.recipient_id.toString() === currentUserId.toString())){ 
@@ -80,7 +78,7 @@ function renderChat(chat){
                 </div>
                 <br><br>
                 <form method="post" class = "chat-form-chat-${chat.id}">
-                    <input type="text" name="body"></input><br><br><br>
+                    <input id = "chat-form-chat-${chat.id}" type="text" name="body"></input><br><br><br>
                     <input type="submit" class="send-message" id= "gab-button-${chat.id}"> Gab </input>
                 </form>
             </div>`;
@@ -90,15 +88,18 @@ function renderChat(chat){
     }
 }
 
-function addEvents(id){
+function addEvents(id){ //rename to be more descriptive
     console.log(`chat_id ${id} length = `, document.querySelectorAll(`.chat-form-chat-${id}`).length)
     document.querySelector(`.chat-form-chat-${id}`).addEventListener("submit", function(e){
         e.preventDefault();
         // debugger
         console.log(`You clicked the button for chat # ${id}`);
+        console.log(document.querySelector(`#chat-form-chat-${id}`).value);
+        const messageInput = document.querySelector(`#chat-form-chat-${id}`).value
+        postMessage(messageInput, id, currentUserId);
     });
 }
-
+ 
 function getMessages(chat){
     chat.attributes.messages.forEach(message => {
         if (message.user_id == currentUserId){
@@ -113,38 +114,30 @@ function getMessages(chat){
 }
 
 
-// // function createFormHandler(e) {
-// //     e.preventDefault();
-// //     const messageInput = document.querySelector("#input-name").value;
-// //     more attributes like chat_id
-// //     postMessage(messageInput) // but with more attributes
-// // }
+function postMessage(body, chat_id, user_id){
+    
+}
 
-// // function sendMessage(chat_id, body){
-// //     const configurationObject = {
-// //         method: "POST",
-// //         headers: {
-// //             "Content-Type": "application/json",
-// //             "Accept": "application/json"
-// //         },
-
-// //         body: JSON.stringify({
-// //             "chat_id": chat_id, //this is the id of the chat div
-// //             "user_id": currentUserId,
-// //             "body": body, //not yet sure how to locate this
-// //         })
-// //     }
-// //     return fetch("http://localhost:3000/chats", configurationObject)
-// //     .then(function(response){
-// //         return response.json();
-// //     })
-// //     .then(function(json){
-// //         // addMessage(json);
-// //         console.log("sendMessage json = ", json)
-// //     })
-// // } 
-
-
-
-// // // function addMessage(){
-
+// function sendMessage(chat_id, body){
+//     const configurationObject = {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json",
+//             "Accept": "application/json"
+//         },
+ 
+//         body: JSON.stringify({
+//             "chat_id": chat_id, //this is the id of the chat div
+//             "user_id": currentUserId,
+//             "body": body, //not yet sure how to locate this
+//         })
+//     }
+//     return fetch("http://localhost:3000/chats", configurationObject)
+//     .then(function(response){
+//         return response.json();
+//     })
+//     .then(function(json){
+//         // addMessage(json);
+//         console.log("sendMessage json = ", json)
+//     })
+// } 
