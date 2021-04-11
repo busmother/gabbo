@@ -63,14 +63,13 @@ function getChats() {
     .then(response => response.json())
     .then(chats => {
         chats.data.forEach(chat => {
-            console.log("chat number = ", chat)
-            renderChats(chat);
-            })
-        }
-    );
-}
+         renderChat(chat);
+        });
+    })
+ }
+ 
 
-function renderChats(chat){
+function renderChat(chat){
     if ((chat.attributes.sender_id.toString() === currentUserId.toString()) || (chat.attributes.recipient_id.toString() === currentUserId.toString())){ 
         const chatMarkup =`
             <div class = "chat">
