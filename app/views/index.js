@@ -128,12 +128,8 @@ function postMessage(body, chat_id){
             "body": body
         })
     }
-    return fetch("http://localhost:3000/messages", configurationObject)
-    .then(function(response){
-        return response.json();
-    })
-    .then(function(json){
-        //addMessage(json);
-        console.log("sendMessage json = ", json)
-    })
+    fetch(`http://localhost:3000/api/v1/chats/${chat_id}/messages`, configurationObject)
+    .then(data=>{return data.json()})
+    .then(res=>{console.log(res)})
+    .catch(error=>console.log(error))
 }
