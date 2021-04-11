@@ -34,7 +34,7 @@ document.querySelector(".update-user").addEventListener("click", function() {
 
 function setCurrentUserName(){
     let currentUserName = document.querySelector('#users-dropdown').value;
-    document.querySelector('.output').innerHTML = "The current user's name is "+currentUserName;
+    document.querySelector('.current-user').innerHTML = "The current user is "+currentUserName;
 }
 
 let currentUserId = "hi"
@@ -78,8 +78,8 @@ function renderChat(chat){
                 </div>
                 <br><br>
                 <form method="post" class = "chat-form-chat-${chat.id}">
-                    <input id = "chat-form-chat-${chat.id}" type="text" name="body"></input><br><br><br>
-                    <input type="submit" class="send-message" id= "gab-button-${chat.id}"> Gab </input>
+                    <input class="message-compose-area" id = "chat-form-chat-${chat.id}" type="text" name="body"></input><br><br><br>
+                    <input type="submit" value="Gab" class="send-message" id= "gab-button-${chat.id}">  </input>
                 </form>
             </div>`;
         document.querySelector('.grid-container').innerHTML += chatMarkup;

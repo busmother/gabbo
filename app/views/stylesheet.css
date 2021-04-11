@@ -14,6 +14,11 @@
     font-family: "Lucida Console", "Courier New", monospace;
 }
 
+/* form {
+    float: right;
+    border: 2px solid yellow;
+} */
+
 .grid-container .chat .messages{
     border: 2px solid yellow;
     height: auto;
@@ -23,6 +28,23 @@
 .grid-container .chat .message-compose-area {
     float: right;
     border: 2px solid yellow;
+}
+
+.label {
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-weight: bold;
+}
+
+#users-dropdown{
+    float: left;
+    background-color: rgb(39, 209, 135);
+    border: none;
+    border-radius: 5px;
+    height: 3rem;
+    width: max-content;
+    color: whitesmoke;
+    font-size: 16px;
+    justify-self: center;
 }
 
 button {
@@ -37,8 +59,27 @@ button {
     justify-self: center;
 }
 
+.send-message {
+    float: right;
+    background-color: rgb(39, 209, 135);
+    border: none;
+    border-radius: 50px;
+    height: 3rem;
+    width: max-content;
+    color: whitesmoke;
+    font-size: 16px;
+    justify-self: center;
+}
+
 .update-user {
     float: left;
+}
+
+.current-user {
+    /* float: left; */
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-weight: bold;
+    font-size: 14px;
 }
 
 .current-user-message {
