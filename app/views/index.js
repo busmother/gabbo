@@ -20,7 +20,6 @@ function fillUsersDropDown(){
     });
 }
 
-
 document.addEventListener('DOMContentLoaded', () =>{
     fillUsersDropDown();
 })
@@ -29,7 +28,9 @@ document.querySelector(".update-user").addEventListener("click", function() {
     setCurrentUserName();
     setCurrentUserId();
     getChats();
+    // add event listeners to buttons, button event => formHandler()
 })
+
 
 function setCurrentUserName(){
     let currentUserName = document.querySelector('#users-dropdown').value;
@@ -62,54 +63,74 @@ function getChats() {
     .then(response => response.json())
     .then(chats => {
         chats.data.forEach(chat => {
-            console.log("inside getChats, currentUserId = ", currentUserId)
-            console.log("inside getChats, chat.attributes.sender_id = ", chat.attributes.sender_id)
-            if ((chat.attributes.sender_id == currentUserId) || (chat.attributes.recipient_id == currentUserId)){ 
-                const chatMarkup =`
-                <div class = "chat">
-                    <h3>Chat between ${chat.attributes.recipient.name} and ${chat.attributes.sender.name}</h3>
-                    <div class = "messages">
-                        <br><br><br>
-                    </div>
-                    <br><br>
-                    <textarea class="message-compose-area"></textarea><br><br><br>
-                    <button class="send-message"> Gab </button>
-                </div>`;
-                document.querySelector('.grid-container').innerHTML += chatMarkup;
-            }
-        });
-    })
+            console.log("chat number = ", chat)
+            renderChats(chat);
+            })
+        }
+    );
 }
 
-function sendMessage(){
-    const configurationObject = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-
-        body: JSON.stringify({
-            "chat_id": chat_id,
-            "user_id": currentUserId,
-            "body": body,
-        })
+function renderChats(chat){
+    if ((chat.attributes.sender_id.toString() === currentUserId.toString()) || (chat.attributes.recipient_id.toString() === currentUserId.toString())){ 
+        const chatMarkup =`
+            <div class = "chat">
+                <h3>Chat between ${chat.attributes.recipient.name} and ${chat.attributes.sender.name}</h3>
+                <div class = "messages">
+                    <br><br><br>
+                </div>
+                <br><br>
+                <form method="post" class = "chat-form-chat-${chat.id}">
+                    <input type="text" name="body"></input><br><br><br>
+                    <input type="submit" class="send-message" id= "gab-button-${chat.id}"> Gab </input>
+                </form>
+            </div>`;
+        document.querySelector('.grid-container').innerHTML += chatMarkup;
+        addEvents(chat.id);
     }
-    return fetch("http://localhost:3000/chats", configurationObject)
-    .then(function(response){
-        return response.json();
-    })
-    .then(function(json){
-        // addMessage(json);
-        console.log("sendMessage json = ", json)
-    })
-} 
+}
 
-document.querySelector(".send-message").addEventListener("click", function() {
-    sendMessage()
-})
+function addEvents(id){
+    console.log(`chat_id ${id} length = `, document.querySelectorAll(`.chat-form-chat-${id}`).length)
+    document.querySelector(`.chat-form-chat-${id}`).addEventListener("submit", function(e){
+        e.preventDefault();
+        // debugger
+        console.log(`You clicked the button for chat # ${id}`);
+    });
+}
 
 
-// function addMessage(){
+// // function createFormHandler(e) {
+// //     e.preventDefault();
+// //     const messageInput = document.querySelector("#input-name").value;
+// //     more attributes like chat_id
+// //     postMessage(messageInput) // but with more attributes
+// // }
 
-// }
+// // function sendMessage(chat_id, body){
+// //     const configurationObject = {
+// //         method: "POST",
+// //         headers: {
+// //             "Content-Type": "application/json",
+// //             "Accept": "application/json"
+// //         },
+
+// //         body: JSON.stringify({
+// //             "chat_id": chat_id, //this is the id of the chat div
+// //             "user_id": currentUserId,
+// //             "body": body, //not yet sure how to locate this
+// //         })
+// //     }
+// //     return fetch("http://localhost:3000/chats", configurationObject)
+// //     .then(function(response){
+// //         return response.json();
+// //     })
+// //     .then(function(json){
+// //         // addMessage(json);
+// //         console.log("sendMessage json = ", json)
+// //     })
+// // } 
+
+
+
+// // // function addMessage(){
+
