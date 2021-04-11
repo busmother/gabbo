@@ -40,3 +40,17 @@ button {
 .update-user {
     float: left;
 }
+
+.current-user-message {
+    float: right;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.other-user-message {
+    float: left;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-weight: bold;
+    font-size: 14px;
+}

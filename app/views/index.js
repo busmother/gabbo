@@ -101,8 +101,14 @@ function addEvents(id){
 
 function getMessages(chat){
     chat.attributes.messages.forEach(message => {
-        const messageBody = `<div id = message-${message.id}>${message.body}</div>`
-        document.querySelector(`#chat-${chat.id} .messages`).innerHTML += messageBody
+        if (message.user_id == currentUserId){
+            const messageBody = `<div class=current-user-message id = message-user-${message.user_id}>${message.body}</div><br>`;
+            document.querySelector(`#chat-${chat.id} .messages`).innerHTML += messageBody
+        } else {
+            const messageBody = `<div class=other-user-message id = message-user-${message.user_id}>${message.body}</div><br>`;
+            document.querySelector(`#chat-${chat.id} .messages`).innerHTML += messageBody
+        }
+        
     })
 }
 
