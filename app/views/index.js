@@ -96,7 +96,7 @@ function addEvents(id){ //rename to be more descriptive
         console.log(`You clicked the button for chat # ${id}`);
         console.log(document.querySelector(`#chat-form-chat-${id}`).value);
         const messageInput = document.querySelector(`#chat-form-chat-${id}`).value
-        postMessage(messageInput, id, currentUserId);
+        postMessage(messageInput, id);
     });
 }
  
@@ -114,30 +114,26 @@ function getMessages(chat){
 }
 
 
-function postMessage(body, chat_id, user_id){
-    
-}
+function postMessage(body, chat_id){
+    const configurationObject = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
 
-// function sendMessage(chat_id, body){
-//     const configurationObject = {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json",
-//             "Accept": "application/json"
-//         },
- 
-//         body: JSON.stringify({
-//             "chat_id": chat_id, //this is the id of the chat div
-//             "user_id": currentUserId,
-//             "body": body, //not yet sure how to locate this
-//         })
-//     }
-//     return fetch("http://localhost:3000/chats", configurationObject)
-//     .then(function(response){
-//         return response.json();
-//     })
-//     .then(function(json){
-//         // addMessage(json);
-//         console.log("sendMessage json = ", json)
-//     })
-// } 
+        body: JSON.stringify({
+            "chat_id": chat_id,
+            "user_id": currentUserId,
+            "body": body
+        })
+    }
+    return fetch("http://localhost:3000/messages", configurationObject)
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(json){
+        //addMessage(json);
+        console.log("sendMessage json = ", json)
+    })
+}
