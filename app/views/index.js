@@ -64,6 +64,7 @@ function getChats() {
     .then(chats => {
         chats.data.forEach(chat => {
          renderChat(chat);
+        //  getMessages();
         });
     })
  }
@@ -72,7 +73,7 @@ function getChats() {
 function renderChat(chat){
     if ((chat.attributes.sender_id.toString() === currentUserId.toString()) || (chat.attributes.recipient_id.toString() === currentUserId.toString())){ 
         const chatMarkup =`
-            <div class = "chat">
+            <div class = "chat", id = "chat-${chat.id}">
                 <h3>Chat between ${chat.attributes.recipient.name} and ${chat.attributes.sender.name}</h3>
                 <div class = "messages">
                     <br><br><br>
@@ -85,6 +86,7 @@ function renderChat(chat){
             </div>`;
         document.querySelector('.grid-container').innerHTML += chatMarkup;
         addEvents(chat.id);
+        getMessages(chat);
     }
 }
 
@@ -95,6 +97,13 @@ function addEvents(id){
         // debugger
         console.log(`You clicked the button for chat # ${id}`);
     });
+}
+
+function getMessages(chat){
+    chat.attributes.messages.forEach(message => {
+        const messageBody = `<div id = message-${message.id}>${message.body}</div>`
+        document.querySelector(`#chat-${chat.id} .messages`).innerHTML += messageBody
+    })
 }
 
 
