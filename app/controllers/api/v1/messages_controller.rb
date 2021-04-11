@@ -12,4 +12,10 @@ class Api::V1::MessagesController < ApplicationController
             render json: {errors: message.errors.full_messages}, status: :unprocessible_entity
         end
     end
+
+    private
+
+    def message_params
+        params.require(:message).permit(:body, :chat_id, :user_id)
+    end
 end
