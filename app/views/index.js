@@ -70,6 +70,7 @@ function getChats() {
 
 function renderChat(chat){
     if ((chat.attributes.sender_id.toString() === currentUserId.toString()) || (chat.attributes.recipient_id.toString() === currentUserId.toString())){ 
+        const chatWindow = document.createElement("div")
         const chatMarkup =`
             <div class = "chat", id = "chat-${chat.id}">
                 <h3>Chat between ${chat.attributes.recipient.name} and ${chat.attributes.sender.name}</h3>
@@ -82,19 +83,16 @@ function renderChat(chat){
                     <input type="submit" value="Gab" class="send-message" id= "gab-button-${chat.id}">  </input>
                 </form>
             </div>`;
-        document.querySelector('.grid-container').innerHTML += chatMarkup;
+        chatWindow.innerHTML += chatMarkup;
+        document.querySelector('.grid-container').append(chatWindow);
         addEvents(chat.id);
         getMessages(chat);
     }
 }
 
 function addEvents(id){ //rename to be more descriptive
-    console.log(`chat_id ${id} length = `, document.querySelectorAll(`.chat-form-chat-${id}`).length)
     document.querySelector(`.chat-form-chat-${id}`).addEventListener("submit", function(e){
         e.preventDefault();
-        // debugger
-        console.log(`You clicked the button for chat # ${id}`);
-        console.log(document.querySelector(`#chat-form-chat-${id}`).value);
         const messageInput = document.querySelector(`#chat-form-chat-${id}`).value
         postMessage(messageInput, id);
     });
@@ -130,7 +128,6 @@ function postMessage(body, chat_id){
     }
     fetch(`http://localhost:3000/api/v1/chats/${chat_id}/messages`, configurationObject)
     .then(data=>{return data.json()})
-    .then(res=>{console.log(res)})
     .catch(error=>console.log(error))
     getChats();
 }
