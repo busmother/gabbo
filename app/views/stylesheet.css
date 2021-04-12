@@ -20,11 +20,19 @@
 } */
 
 .grid-container .chat .messages{
-    border: 2px solid yellow;
+    border: 2px dashed yellow;
     height: auto;
     text-align: center;
     height: 150px;
     overflow: scroll;
+}
+
+.grid-container .chat .messages .current-user-message{
+    background-color: #c1f5de;
+}
+
+.grid-container .chat .messages .other-user-message{
+    background-color: #f1f58e;
 }
 
 .grid-container .chat .message-compose-area {
