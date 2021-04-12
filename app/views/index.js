@@ -131,3 +131,21 @@ function postMessage(body, chat_id){
     .catch(error=>console.log(error))
     getChats();
 }
+
+function createUser(name){
+    const configurationObject = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+
+        body: JSON.stringify({
+            "name": name,
+        })
+    }
+    fetch(`http://localhost:3000/api/v1/users`, configurationObject)
+    .then(data=>{return data.json()})
+    .catch(error=>console.log(error))
+    fillUsersDropDown();
+}
