@@ -32,6 +32,10 @@ document.querySelector(".update-user").addEventListener("click", function() {
     getChats();
 })
 
+document.querySelector(".start-chat").addEventListener("click", function() {
+    fillOtherUsersDropDown();
+})
+
 
 function setCurrentUserName(){
     let currentUserName = document.querySelector('#users-dropdown').value;
@@ -52,6 +56,28 @@ function setCurrentUserId(){
         })
     })
 }
+
+function fillOtherUsersDropDown(){
+    const otherUsersDropdown = document.querySelector("#other-users-dropdown");
+    let allOtherUsers = [];
+    fetch (usersEndPoint)
+    .then(response => response.json())
+    .then(users => {
+        users.data.forEach(user => {
+            if(user.id != currentUserId) {
+                allOtherUsers.push(user.attributes.name);
+            }
+        })
+        for (let i = 0; i < allOtherUsers.length; i++) {
+            let optn = allOtherUsers[i];
+            var el = document.createElement("option");
+            el.textContent = optn;
+            el.value = optn;
+            otherUsersDropdown.add(el, null);
+        }
+    })
+}
+
 
 function clearChats() {
     const chatMarkup = ``;
