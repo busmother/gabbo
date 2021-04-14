@@ -104,6 +104,11 @@ function getChats() {
     .then(response => response.json())
     .then(chats => {
         chats.data.forEach(chat => {
+            debugger
+            new Chat({id: chat.id, 
+                sender_id: chat.attributes.sender_id, 
+                recipient_id: chat.attributes.recipient_id, 
+                messages: chat.attributes.messages}) //new - putting this in the console doesn't work tho
          renderChat(chat);
         });
     })
