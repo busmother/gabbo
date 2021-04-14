@@ -136,9 +136,8 @@ function addGabButtonEvent(id){
 function addCreateUserButtonEvent(){
     document.querySelector(`.new-user-form`).addEventListener("submit", function(e){
         e.preventDefault();
-        // const newUserName = document.querySelector(`#chat-form-chat-${id}`).value
-        console.log("you pushed the create user button")
-        // postMessage(newUserName);
+        const newUserName = document.querySelector(`.new-user-compose-area`).value
+        createUser(newUserName);
     });
 }
 
@@ -149,7 +148,7 @@ function createUser(name){
             "Content-Type": "application/json",
             "Accept": "application/json"
         },
-
+        
         body: JSON.stringify({
             "name": name,
         })
