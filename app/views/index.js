@@ -4,20 +4,20 @@ const chatsEndPoint = "http://localhost:3000/api/v1/chats"
 function fillUsersDropDown(){
     const usersDropdown = document.querySelector("#users-dropdown")
     let allUsers = []
-    let allUsersIds = [] // new
+    let allUsersIds = []
     fetch(usersEndPoint)
     .then(response => response.json())
     .then(users =>{
         users.data.forEach(user =>{
             allUsers.push(user.attributes.name);
-            allUsersIds.push(user.id); // new
+            allUsersIds.push(user.id);
         })
         for (let i = 0; i < allUsers.length; i++) {
             let optn = allUsers[i];
             var el = document.createElement("option");
             el.textContent = optn;
             el.value = optn;
-            el.id = allUsersIds[i] // new
+            el.id = allUsersIds[i]
             usersDropdown.add(el, null);
         }
     });
@@ -193,7 +193,14 @@ function createUser(name){
             document.querySelector('.current-user').innerHTML = "The current user is "+currentUserName;
             getChats();
         })
-        .catch(error=>console.log(error))
+        .catch(error=>console.log(error));
+    let select = document.querySelector('#users-dropdown')
+    let length = select.options.length;
+    for (i = length-1; i >=0; i--){
+        select.options[i] = null;
+    }
+    fillUsersDropDown();
+    fillOtherUsersDropDown();
 }
 
 function createChat(){
