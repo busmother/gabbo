@@ -51,7 +51,7 @@ function setCurrentUserName(){
 
 let currentUserId = "hi"
 
-function setCurrentUserId(){
+function setCurrentUserId(){ //this is probably unnecessary now since fillUsersDropDown() includes id
     let currentUserName = document.querySelector('#users-dropdown').value;
     fetch(usersEndPoint) // you could fetch the specific user name and return the specific id
     .then(response => response.json())
@@ -67,19 +67,20 @@ function setCurrentUserId(){
 function fillOtherUsersDropDown(){
     const otherUsersDropdown = document.querySelector("#other-users-dropdown");
     let allOtherUsers = [];
+    let allOtherUserIds = [];
     fetch (usersEndPoint)
     .then(response => response.json())
     .then(users => {
         users.data.forEach(user => {
-            if(user.id != currentUserId) {
-                allOtherUsers.push(user.attributes.name);
-            }
+            allOtherUsers.push(user.attributes.name);
+            allOtherUserIds.push(user.id)
         })
         for (let i = 0; i < allOtherUsers.length; i++) {
             let optn = allOtherUsers[i];
             var el = document.createElement("option");
             el.textContent = optn;
             el.value = optn;
+            el.id = allOtherUserIds[i]
             otherUsersDropdown.add(el, null);
         }
     })
@@ -136,7 +137,6 @@ function getMessages(chat){
         
     })
 }
-
 
 function postMessage(body, chat_id){
     const configurationObject = {
