@@ -4,17 +4,20 @@ const chatsEndPoint = "http://localhost:3000/api/v1/chats"
 function fillUsersDropDown(){
     const usersDropdown = document.querySelector("#users-dropdown")
     let allUsers = []
+    let allUsersIds = [] // new
     fetch(usersEndPoint)
     .then(response => response.json())
     .then(users =>{
         users.data.forEach(user =>{
             allUsers.push(user.attributes.name);
+            allUsersIds.push(user.id); // new
         })
         for (let i = 0; i < allUsers.length; i++) {
             let optn = allUsers[i];
             var el = document.createElement("option");
             el.textContent = optn;
             el.value = optn;
+            el.id = allUsersIds[i] // new
             usersDropdown.add(el, null);
         }
     });
