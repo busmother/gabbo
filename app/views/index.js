@@ -25,7 +25,7 @@ function fillUsersDropDown(){
 
 document.addEventListener('DOMContentLoaded', () =>{
     fillUsersDropDown();
-    addCreateUserButtonEvent()
+    // addCreateUserButtonEvent()
 
 })
 
@@ -40,6 +40,13 @@ document.querySelector(".start-chat").addEventListener("click", function() {
     console.log("new user chat with =", document.querySelector("#other-users-dropdown").value);
     createChat()
 })
+
+
+document.querySelector(`.new-user-form`).addEventListener("submit", function(e){
+    e.preventDefault();
+    const newUserName = document.querySelector(`.new-user-compose-area`).value
+    createUser(newUserName);
+});
 
 
 function setCurrentUserName(){
@@ -161,14 +168,6 @@ function addGabButtonEvent(id){
         e.preventDefault();
         const messageInput = document.querySelector(`#chat-form-chat-${id}`).value
         postMessage(messageInput, id);
-    });
-}
-
-function addCreateUserButtonEvent(){
-    document.querySelector(`.new-user-form`).addEventListener("submit", function(e){
-        e.preventDefault();
-        const newUserName = document.querySelector(`.new-user-compose-area`).value
-        createUser(newUserName);
     });
 }
 
