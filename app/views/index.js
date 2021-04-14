@@ -48,13 +48,14 @@ document.querySelector(`.new-user-form`).addEventListener("submit", function(e){
     createUser(newUserName);
 });
 
+let currentUserId = "hi"
 
 function setCurrentUserName(){
     let currentUserName = document.querySelector('#users-dropdown').value;
     document.querySelector('.current-user').innerHTML = "The current user is "+currentUserName;
 }
 
-let currentUserId = "hi"
+
 
 function setCurrentUserId(){ //this is probably unnecessary now since fillUsersDropDown() includes id
     let currentUserName = document.querySelector('#users-dropdown').value;
@@ -185,13 +186,14 @@ function createUser(name){
     }
     fetch(`http://localhost:3000/api/v1/users`, configurationObject)
     .then(data=>{return data.json()})
-    .then(data=> console.log("data from fetch", data))
-    .then(data => {
-        currentUserId = data.id
-        currentUserName = data.name
-        getChats();
-    })
-    .catch(error=>console.log(error))
+    .then(
+        data => {
+            currentUserId = data.id
+            currentUserName = data.name
+            document.querySelector('.current-user').innerHTML = "The current user is "+currentUserName;
+            getChats();
+        })
+        .catch(error=>console.log(error))
 }
 
 function createChat(){
