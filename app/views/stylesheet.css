@@ -52,15 +52,15 @@
 }
 
 #new-user-label {
-    float: right;
+    float: left;
 }
 
 .new-user-compose-area{
-    float: right;
+    float: left;
 }
 
 .create-user{
-    float: right
+    float: left;
 }
 
 #users-dropdown{
