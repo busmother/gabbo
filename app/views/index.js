@@ -33,9 +33,6 @@ document.querySelector(".update-user").addEventListener("click", function() {
     setCurrentUserName();
     setCurrentUserId();
     getChats();
-})
-
-document.querySelector(".load-other-users").addEventListener("click", function() {
     fillOtherUsersDropDown();
 })
 
@@ -196,7 +193,7 @@ function createUser(name){
 function createChat(){
     const dropdown = document.querySelector(`#other-users-dropdown`)
     const recipient_id = dropdown.options[dropdown.selectedIndex].id;
-    console.log("you want to start a chat with a user with the id of =", recipient_id)
+    console.log("you want to start a chat between",currentUserId, "and", recipient_id)
     const configurationObject = {
         method: "POST",
         headers: {
@@ -204,9 +201,9 @@ function createChat(){
             "Accept": "application/json"
         },
 
-        body: JSON.stringify({ //check if the sender / recipient ids are the same as user_id
+        body: JSON.stringify({ 
             "sender_id": currentUserId,
-            "recipient_id": userName,
+            "recipient_id": recipient_id,
         })
     }
     fetch(`http://localhost:3000/api/v1/chats`, configurationObject)
