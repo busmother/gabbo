@@ -1,3 +1,14 @@
+.grid-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+}
+
+.grid-container .header-item{ 
+    justify-content: center;
+    align-items: center;
+}
+
 .grid-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -13,11 +24,6 @@
     text-align: center;
     font-family: "Lucida Console", "Courier New", monospace;
 }
-
-/* form {
-    float: right;
-    border: 2px solid yellow;
-} */
 
 .grid-container .chat .messages{
     border: 2px dashed yellow;
@@ -43,6 +49,18 @@
 .label {
     font-family: "Lucida Console", "Courier New", monospace;
     font-weight: bold;
+}
+
+#new-user-label {
+    float: right;
+}
+
+.new-user-compose-area{
+    float: right;
+}
+
+.create-user{
+    float: right
 }
 
 #users-dropdown{
@@ -86,10 +104,12 @@ button {
 }
 
 .current-user {
-    /* float: left; */
+    /* float: center;  */
     font-family: "Lucida Console", "Courier New", monospace;
     font-weight: bold;
     font-size: 14px;
+    justify-content: center;
+    align-items: center;
 }
 
 .current-user-message {

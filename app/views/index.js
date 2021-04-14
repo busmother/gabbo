@@ -22,13 +22,14 @@ function fillUsersDropDown(){
 
 document.addEventListener('DOMContentLoaded', () =>{
     fillUsersDropDown();
+    addCreateUserButtonEvent()
+
 })
 
 document.querySelector(".update-user").addEventListener("click", function() {
     setCurrentUserName();
     setCurrentUserId();
     getChats();
-    // add event listeners to buttons, button event => formHandler()
 })
 
 
@@ -85,17 +86,9 @@ function renderChat(chat){
             </div>`;
         chatWindow.innerHTML += chatMarkup;
         document.querySelector('.grid-container').append(chatWindow);
-        addEvents(chat.id);
+        addGabButtonEvent(chat.id);
         getMessages(chat);
     }
-}
-
-function addEvents(id){ //rename to be more descriptive
-    document.querySelector(`.chat-form-chat-${id}`).addEventListener("submit", function(e){
-        e.preventDefault();
-        const messageInput = document.querySelector(`#chat-form-chat-${id}`).value
-        postMessage(messageInput, id);
-    });
 }
  
 function getMessages(chat){
@@ -130,6 +123,23 @@ function postMessage(body, chat_id){
     .then(data=>{return data.json()})
     .catch(error=>console.log(error))
     getChats();
+}
+
+function addGabButtonEvent(id){ 
+    document.querySelector(`.chat-form-chat-${id}`).addEventListener("submit", function(e){
+        e.preventDefault();
+        const messageInput = document.querySelector(`#chat-form-chat-${id}`).value
+        postMessage(messageInput, id);
+    });
+}
+
+function addCreateUserButtonEvent(){
+    document.querySelector(`.new-user-form`).addEventListener("submit", function(e){
+        e.preventDefault();
+        // const newUserName = document.querySelector(`#chat-form-chat-${id}`).value
+        console.log("you pushed the create user button")
+        // postMessage(newUserName);
+    });
 }
 
 function createUser(name){

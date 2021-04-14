@@ -10,12 +10,29 @@
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
 </head>
 <body>
-    <label for="users-dropdown" class="label">Choose a user:</label><br><br>
-    <select name="users" id="users-dropdown"></select>
-    <br><br><br><br>    
-    <button class = "update-user">Update User</button>
-    <br><br><br><br>    
-    <p class = "current-user"></p>
+    <div class="grid-header">
+        <div class="header-item">
+            <br>
+            <label for="users-dropdown" class="label">Choose a user:</label><br><br>
+            <select name="users" id="users-dropdown"></select>
+            <br><br><br><br>    
+            <button class = "update-user">Update User</button>
+            <br><br><br><br>    
+        </div>  
+        <div class="header-item">
+            <p class = "current-user"></p>
+        </div>
+        <div class="header-item">
+            <form class="new-user-form">
+                <br>
+                <label for="new-user" id="new-user-label" class="label">Or create a new user:</label><br><br>
+                <input class="new-user-compose-area"></input>
+                <br><br><br><br>    
+                <button class = "create-user">Create User</button>
+            </form>
+            <br><br><br><br>    
+        </div>
+    </div>
     <br><br>
     <div class="grid-container">
     </div>
