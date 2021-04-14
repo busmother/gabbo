@@ -17,4 +17,5 @@ class Api::V1::ChatsController < ApplicationController
             render json: {errors: chat.errors.full_messages}, status: :unprocessible_entity
         end
     end
+
 end

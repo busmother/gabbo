@@ -32,8 +32,12 @@ document.querySelector(".update-user").addEventListener("click", function() {
     getChats();
 })
 
-document.querySelector(".start-chat").addEventListener("click", function() {
+document.querySelector(".load-other-users").addEventListener("click", function() {
     fillOtherUsersDropDown();
+})
+
+document.querySelector(".start-chat").addEventListener("click", function() {
+    console.log("new user chat with =", document.querySelector("#other-users-dropdown").value)
 })
 
 
@@ -183,4 +187,23 @@ function createUser(name){
     .then(data=>{return data.json()})
     .catch(error=>console.log(error))
     fillUsersDropDown();
+}
+
+function createChat(userName){
+    const configurationObject = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+
+        body: JSON.stringify({ //check if the sender / recipient ids are the same as user_id
+            "sender_id": currentUserId,
+            "recipient_id": userName,
+        })
+    }
+    fetch(`http://localhost:3000/api/v1/chats`, configurationObject)
+    .then(data=>{return data.json()})
+    .catch(error=>console.log(error))
+    getChats()
 }
