@@ -40,7 +40,8 @@ document.querySelector(".load-other-users").addEventListener("click", function()
 })
 
 document.querySelector(".start-chat").addEventListener("click", function() {
-    console.log("new user chat with =", document.querySelector("#other-users-dropdown").value)
+    console.log("new user chat with =", document.querySelector("#other-users-dropdown").value);
+    createChat()
 })
 
 
@@ -192,7 +193,10 @@ function createUser(name){
     fillUsersDropDown();
 }
 
-function createChat(userName){
+function createChat(){
+    const dropdown = document.querySelector(`#other-users-dropdown`)
+    const recipient_id = dropdown.options[dropdown.selectedIndex].id;
+    console.log("you want to start a chat with a user with the id of =", recipient_id)
     const configurationObject = {
         method: "POST",
         headers: {

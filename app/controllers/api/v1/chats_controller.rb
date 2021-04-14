@@ -18,4 +18,9 @@ class Api::V1::ChatsController < ApplicationController
         end
     end
 
+    private
+
+    def chat_params
+        params.require(:chat).permit(:sender_id, :recipient_id)
+    end
 end
