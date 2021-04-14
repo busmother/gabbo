@@ -185,8 +185,13 @@ function createUser(name){
     }
     fetch(`http://localhost:3000/api/v1/users`, configurationObject)
     .then(data=>{return data.json()})
+    .then(data=> console.log("data from fetch", data))
+    .then(data => {
+        currentUserId = data.id
+        currentUserName = data.name
+        getChats();
+    })
     .catch(error=>console.log(error))
-    fillUsersDropDown();
 }
 
 function createChat(){
