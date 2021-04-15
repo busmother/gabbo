@@ -1,12 +1,10 @@
-// const usersEndPoint = "http://localhost:3000/api/v1/users"
-
 document.addEventListener('DOMContentLoaded', () =>{
-    UsersApi.getUsers(); //used to be fillUsersDropdown()
+    UsersApi.getUsers(); //first fetch
 })
 
 document.querySelector(".update-user").addEventListener("click", function() {
-    User.setCurrentUser();
-    ChatsApi.getChats(); // fetches and renders chats
+    User.setCurrentUser(); // updates text
+    ChatsApi.getChats(); // fetches (second fetch) and renders chats
     User.fillOtherUsersDropdown(); //renders usernames
 })
 
@@ -21,4 +19,3 @@ document.querySelector(`.new-user-form`).addEventListener("submit", function(e){
     const newUserName = document.querySelector(`.new-user-compose-area`).value
     UsersApi.createUser(newUserName);
 });
-

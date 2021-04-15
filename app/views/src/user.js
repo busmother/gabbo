@@ -32,15 +32,6 @@ class User {
         this.render(otherUsersDropdown);
     }
 
-    static setCurrentUserId(){
-        let currentUserName = document.querySelector(`#users-dropdown`).value;
-        this.all.forEach(user => {
-            if (user.name === currentUserName){
-                currentUserId = user.id;
-            }
-        })
-    }
-
     static setCurrentUser(){
         let usersDropdown = document.querySelector(`#users-dropdown`)
         let currentUserId = usersDropdown.options[usersDropdown.selectedIndex].id;

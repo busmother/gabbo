@@ -42,6 +42,7 @@ class ChatsApi {
     }
 
     static createMessage(body, chat_id){
+        currentUserId = User.setCurrentUser().id
         const configurationObject = {
             method: "POST",
             headers: {
