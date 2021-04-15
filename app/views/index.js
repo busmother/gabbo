@@ -24,8 +24,6 @@ function fillUsersDropDown(){
 
 document.addEventListener('DOMContentLoaded', () =>{
     fillUsersDropDown();
-    // addCreateUserButtonEvent()
-
 })
 
 document.querySelector(".update-user").addEventListener("click", function() {
@@ -53,7 +51,6 @@ function setCurrentUserName(){
     let currentUserName = document.querySelector('#users-dropdown').value;
     document.querySelector('.current-user').innerHTML = "The current user is "+currentUserName;
 }
-
 
 
 function setCurrentUserId(){ //this is probably unnecessary now since fillUsersDropDown() includes id
@@ -90,14 +87,6 @@ function fillOtherUsersDropDown(){
         }
     })
 }
-
-// function addGabButtonEvent(id){ 
-//     document.querySelector(`.chat-form-chat-${id}`).addEventListener("submit", function(e){
-//         e.preventDefault();
-//         const messageInput = document.querySelector(`#chat-form-chat-${id}`).value
-//         ChatsApi.createMessage(messageInput, id);
-//     });
-// }
 
 function createUser(name){
     const configurationObject = {
