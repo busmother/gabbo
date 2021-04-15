@@ -36,7 +36,7 @@ class Chat {
     attachToDom(){ 
         Chat.container.append(this.render());
         Chat.addGabButtonEvent(this.id)
-        Chat.getMessages(this) // argument different from original
+        Chat.getMessages(this)
     }
 
    static addGabButtonEvent(id){ 

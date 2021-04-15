@@ -11,34 +11,27 @@ class User {
         User.all.push(this)
     }
 
-    static render(dropdown) {
-        for (let i = 0; i < this.all.length; i++) {
-            let optn = this.all[i].name;
+    static render(dropdown, array) {
+        for (let i = 0; i < array.length; i++) {
+            let optn = array[i].name;
             var el = document.createElement("option");
             el.textContent = optn;
             el.value = optn;
-            el.id = this.all[i].id
+            el.id = array[i].id
             dropdown.add(el, null);
         }
     }
 
     static fillUsersDropdown(){
         const usersDropdown = document.querySelector(`#users-dropdown`)
-        this.render(usersDropdown);
+        this.render(usersDropdown, this.all);
     }
 
     static fillOtherUsersDropdown(){
         const otherUsersDropdown = document.querySelector(`#other-users-dropdown`);
-        this.render(otherUsersDropdown);
-    }
-
-    static setCurrentUserId(){
-        let currentUserName = document.querySelector(`#users-dropdown`).value;
-        this.all.forEach(user => {
-            if (user.name === currentUserName){
-                currentUserId = user.id;
-            }
-        })
+        this.setCurrentUser()
+        console.log("current user = ", currentUser)
+        this.render(otherUsersDropdown, this.all);
     }
 
     static currentUser = "hi"
@@ -52,8 +45,8 @@ class User {
                 currentUser = user
             }
         })
-        console.log("current user is = ", currentUser)
         document.querySelector('.current-user').innerHTML = "The current user is "+currentUser.name;
+        return currentUser;
     }
 
     //fillOtherUsersDropdown 
