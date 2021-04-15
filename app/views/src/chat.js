@@ -44,4 +44,8 @@ class Chat {
         getMessages(this) // argument different from original
     }
 
+    static clearChats() { //might be unnecessary, we'll see!
+        const chatMarkup = ``
+        document.querySelector('.grid-container').innerHTML = chatMarkup;
+    }
 }

@@ -1,5 +1,4 @@
 const usersEndPoint = "http://localhost:3000/api/v1/users"
-const chatsEndPoint = "http://localhost:3000/api/v1/chats"
 
 function fillUsersDropDown(){
     const usersDropdown = document.querySelector("#users-dropdown")
@@ -32,13 +31,13 @@ document.addEventListener('DOMContentLoaded', () =>{
 document.querySelector(".update-user").addEventListener("click", function() {
     setCurrentUserName();
     setCurrentUserId();
-    ChatApi.getChats();
+    ChatsApi.getChats();
     fillOtherUsersDropDown();
 })
 
 document.querySelector(".start-chat").addEventListener("click", function() {
     console.log("new user chat with =", document.querySelector("#other-users-dropdown").value);
-    createChat()
+    ChatsApi.createChat()
 })
 
 
@@ -91,34 +90,6 @@ function fillOtherUsersDropDown(){
         }
     })
 }
-
-
-// function clearChats() { //might not need, keeping here for now
-//     const chatMarkup = ``;
-//     document.querySelector('.grid-container').innerHTML = chatMarkup;
-// }
-
- function createChat(){
-    const dropdown = document.querySelector(`#other-users-dropdown`)
-    const recipient_id = dropdown.options[dropdown.selectedIndex].id;
-    console.log("you want to start a chat between",currentUserId, "and", recipient_id)
-    const configurationObject = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-
-        body: JSON.stringify({ 
-            "sender_id": currentUserId,
-            "recipient_id": recipient_id,
-        })
-    }
-    fetch(`http://localhost:3000/api/v1/chats`, configurationObject)
-    .then(data=>{return data.json()})
-    .catch(error=>console.log(error))
-    getChats()
-}
  
 function getMessages(chat){
     chat.messages.forEach(message => {
@@ -150,7 +121,7 @@ function postMessage(body, chat_id){
     fetch(`http://localhost:3000/api/v1/chats/${chat_id}/messages`, configurationObject)
     .then(data=>{return data.json()})
     .catch(error=>console.log(error))
-    getChats();
+    ChatsApi.getChats();
 }
 
 function addGabButtonEvent(id){ 
@@ -180,7 +151,7 @@ function createUser(name){
             currentUserId = data.id
             currentUserName = data.name
             document.querySelector('.current-user').innerHTML = "The current user is "+currentUserName;
-            getChats();
+            ChatsApi.getChats();
         })
         .catch(error=>console.log(error));
     let select = document.querySelector('#users-dropdown')
