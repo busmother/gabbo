@@ -1,4 +1,4 @@
-const usersEndPoint = "http://localhost:3000/api/v1/users"
+// const usersEndPoint = "http://localhost:3000/api/v1/users"
 
 document.addEventListener('DOMContentLoaded', () =>{
     UsersApi.getUsers(); //used to be fillUsersDropdown()
@@ -21,30 +21,6 @@ document.querySelector(`.new-user-form`).addEventListener("submit", function(e){
     const newUserName = document.querySelector(`.new-user-compose-area`).value
     createUser(newUserName);
 });
-
-// let currentUserId = "hi"
-
-function fillOtherUsersDropDown(){
-    const otherUsersDropdown = document.querySelector("#other-users-dropdown");
-    let allOtherUsers = [];
-    let allOtherUserIds = [];
-    fetch (usersEndPoint)
-    .then(response => response.json())
-    .then(users => {
-        users.data.forEach(user => {
-            allOtherUsers.push(user.attributes.name);
-            allOtherUserIds.push(user.id)
-        })
-        for (let i = 0; i < allOtherUsers.length; i++) {
-            let optn = allOtherUsers[i];
-            var el = document.createElement("option");
-            el.textContent = optn;
-            el.value = optn;
-            el.id = allOtherUserIds[i]
-            otherUsersDropdown.add(el, null);
-        }
-    })
-}
 
 function createUser(name){
     const configurationObject = {

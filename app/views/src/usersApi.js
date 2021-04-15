@@ -14,5 +14,25 @@ class UsersApi {
         })
     }
 
-    //static createUser()
+    static createUser(){
+        const newUserName = document.querySelector(`.new-user-compose-area`)
+        const configurationObject = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+
+            body: JSON.stringify({
+                "name": name,
+            })
+        }
+        fetch(this.baseUrl, configurationObject)
+        .then(data=>{return data.json()})
+        .then(
+            data => {
+                // set current user ?
+            })
+            .catch(error=>console.log(error));
+    }
 }

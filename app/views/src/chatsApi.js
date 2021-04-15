@@ -21,6 +21,7 @@ class ChatsApi {
     static createChat(){
         const dropdown = document.querySelector(`#other-users-dropdown`)
         const recipient_id = dropdown.options[dropdown.selectedIndex].id
+        const currentUserId = User.setCurrentUser().id;
         const configurationObject ={
             method: "POST",
             headers: {
@@ -37,6 +38,7 @@ class ChatsApi {
         .then(data=>{return data.json()})
         .catch(error=>console.log(error))
         this.getChats()
+        console.log("you started another chat")
     }
 
     static createMessage(body, chat_id){

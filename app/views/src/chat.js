@@ -54,7 +54,7 @@ class Chat {
 
     static getMessages(chat){
         chat.messages.forEach(message => {
-            if (message.user_id == currentUserId){
+            if (message.user_id == User.setCurrentUser().id){
                 const messageBody = `<div class=current-user-message id = message-user-${message.user_id}>${message.body}</div><br>`;
                 document.querySelector(`#chat-${chat.id} .messages`).innerHTML += messageBody
             } else {

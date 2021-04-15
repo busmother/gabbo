@@ -41,8 +41,6 @@ class User {
         })
     }
 
-    static currentUser = "hi"
-
     static setCurrentUser(){
         let usersDropdown = document.querySelector(`#users-dropdown`)
         let currentUserId = usersDropdown.options[usersDropdown.selectedIndex].id;
@@ -52,9 +50,8 @@ class User {
                 currentUser = user
             }
         })
-        console.log("current user is = ", currentUser)
         document.querySelector('.current-user').innerHTML = "The current user is "+currentUser.name;
+        return currentUser;
     }
 
-    //fillOtherUsersDropdown 
 }
