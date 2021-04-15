@@ -17,14 +17,14 @@ class User {
             var el = document.createElement("option");
             el.textContent = optn;
             el.value = optn;
-            el.id = this.all[i].id
+            el.id = array[i].id
             dropdown.add(el, null);
         }
     }
 
     static fillUsersDropdown(){
         const usersDropdown = document.querySelector(`#users-dropdown`)
-        this.render(usersDropdown);
+        this.render(usersDropdown, this.all);
     }
 
     static fillOtherUsersDropdown(){
