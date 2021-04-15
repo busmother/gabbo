@@ -1,10 +1,11 @@
 class ChatsApi {
 
-    static baseUrl = "http://localhost:3000/api/v1/chats"
+    static baseUrl = `http://localhost:3000/api/v1/users/`
 
     static getChats(){
         Chat.clearChats()
-        fetch(this.baseUrl)
+        const user_id = User.setCurrentUser().id
+        fetch(this.baseUrl+`${user_id}/chats`)
         .then(r => r.json())
         .then(json => {
             json["data"].forEach(element => {

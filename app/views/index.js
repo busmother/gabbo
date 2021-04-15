@@ -13,7 +13,6 @@ document.querySelector(".start-chat").addEventListener("click", function() {
     ChatsApi.createChat()
 })
 
-
 document.querySelector(`.new-user-form`).addEventListener("submit", function(e){
     e.preventDefault();
     const newUserName = document.querySelector(`.new-user-compose-area`).value

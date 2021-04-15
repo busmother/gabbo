@@ -20,9 +20,3 @@ class ChatSerializer
   end
   
 end
-
-#you could create something like the below 
-#that could lead to more custom events:
-#def recently_created?
-# Date.today.prev_month < object.created_at
-#here 'object' is chat
