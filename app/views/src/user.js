@@ -12,7 +12,7 @@ class User {
     }
 
     static render(dropdown) {
-        for (let i = 0; i < this.all.length; i++) { //could potentially refactor to a render() function that could be used in other users dropdown
+        for (let i = 0; i < this.all.length; i++) {
             let optn = this.all[i].name;
             var el = document.createElement("option");
             el.textContent = optn;
@@ -28,11 +28,14 @@ class User {
     }
 
     static fillOtherUsersDropdown(){
-        const otherUsersDropdown = document.querySelector("#other-users-dropdown");
+        const otherUsersDropdown = document.querySelector(`#other-users-dropdown`);
         this.render(otherUsersDropdown);
     }
 
-
+    static setCurrentUserName(){
+        let currentUserName = document.querySelector('#users-dropdown').value;
+        document.querySelector('.current-user').innerHTML = "The current user is "+currentUserName;
+    }
 
     //setCurrentUserName ?
     //setCurrentUserId ?

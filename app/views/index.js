@@ -1,14 +1,14 @@
-
+const usersEndPoint = "http://localhost:3000/api/v1/users"
 
 document.addEventListener('DOMContentLoaded', () =>{
     UsersApi.getUsers(); //used to be fillUsersDropdown()
 })
 
 document.querySelector(".update-user").addEventListener("click", function() {
-    setCurrentUserName();
-    setCurrentUserId();
-    ChatsApi.getChats();
-    fillOtherUsersDropDown();
+    User.setCurrentUserName(); // updates the text on the page
+    setCurrentUserId(); // updates the global variable
+    ChatsApi.getChats(); // fetches and renders chats
+    User.fillOtherUsersDropdown(); //renders usernames
 })
 
 document.querySelector(".start-chat").addEventListener("click", function() {
@@ -24,11 +24,6 @@ document.querySelector(`.new-user-form`).addEventListener("submit", function(e){
 });
 
 let currentUserId = "hi"
-
-function setCurrentUserName(){
-    let currentUserName = document.querySelector('#users-dropdown').value;
-    document.querySelector('.current-user').innerHTML = "The current user is "+currentUserName;
-}
 
 
 function setCurrentUserId(){ //this is probably unnecessary now since fillUsersDropdown() includes id
