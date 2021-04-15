@@ -15,12 +15,13 @@ class Chat {
         this.messages = messages
 
         this.element = document.createElement("div")
+        this.element.dataset["id"] = this.id
 
         Chat.all.push(this)
     }
 
     render(){
-        this.element.innerHTML +=  `
+        this.element.innerHTML =  `
             <div class = "chat", id = "chat-${this.id}">
                 <h3>Chat between ${this.recipient.name} and ${this.sender.name}</h3>
                 <div class = "messages">
@@ -40,7 +41,7 @@ class Chat {
     attachToDom(){
         Chat.container.append(this.render());
         addGabButtonEvent(this.id)
-        getMessages(this.messages) // argument different from original
+        getMessages(this) // argument different from original
     }
 
 }

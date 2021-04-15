@@ -100,7 +100,7 @@ function clearChats() {
 
 function getChats() {
     clearChats()
-    fetch(chatsEndPoint)
+    fetch(chatsEndPoint) //update the serializer function so it filters chats
     .then(response => response.json())
     .then(chats => {
         chats.data.forEach(chat => {
@@ -108,8 +108,9 @@ function getChats() {
                 sender: chat.attributes.sender, 
                 recipient: chat.attributes.recipient, 
                 messages: chat.attributes.messages}) //new 
-                console.log("chatWindow = ", chatWindow)
-                chatWindow.attachToDom
+                console.log("chatWindow = ", chatWindow.element)
+                chatWindow.render();
+                chatWindow.attachToDom();
         //  renderChat(chat);
         });
     })
@@ -138,7 +139,7 @@ function getChats() {
 // }
  
 function getMessages(chat){
-    chat.attributes.messages.forEach(message => {
+    chat.messages.forEach(message => {
         if (message.user_id == currentUserId){
             const messageBody = `<div class=current-user-message id = message-user-${message.user_id}>${message.body}</div><br>`;
             document.querySelector(`#chat-${chat.id} .messages`).innerHTML += messageBody
