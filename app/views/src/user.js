@@ -32,12 +32,29 @@ class User {
         this.render(otherUsersDropdown);
     }
 
-    static setCurrentUserName(){
-        let currentUserName = document.querySelector('#users-dropdown').value;
-        document.querySelector('.current-user').innerHTML = "The current user is "+currentUserName;
+    static setCurrentUserId(){
+        let currentUserName = document.querySelector(`#users-dropdown`).value;
+        this.all.forEach(user => {
+            if (user.name === currentUserName){
+                currentUserId = user.id;
+            }
+        })
     }
 
-    //setCurrentUserName ?
-    //setCurrentUserId ?
-    //fillOtherUsersDropdown ?
+    static currentUser = "hi"
+
+    static setCurrentUser(){
+        let usersDropdown = document.querySelector(`#users-dropdown`)
+        let currentUserId = usersDropdown.options[usersDropdown.selectedIndex].id;
+        let currentUser = ``
+        this.all.forEach(user => {
+            if (user.id === currentUserId){
+                currentUser = user
+            }
+        })
+        console.log("current user is = ", currentUser)
+        document.querySelector('.current-user').innerHTML = "The current user is "+currentUser.name;
+    }
+
+    //fillOtherUsersDropdown 
 }

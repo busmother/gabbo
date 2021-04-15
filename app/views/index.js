@@ -5,8 +5,7 @@ document.addEventListener('DOMContentLoaded', () =>{
 })
 
 document.querySelector(".update-user").addEventListener("click", function() {
-    User.setCurrentUserName(); // updates the text on the page
-    setCurrentUserId(); // updates the global variable
+    User.setCurrentUser();
     ChatsApi.getChats(); // fetches and renders chats
     User.fillOtherUsersDropdown(); //renders usernames
 })
@@ -23,21 +22,7 @@ document.querySelector(`.new-user-form`).addEventListener("submit", function(e){
     createUser(newUserName);
 });
 
-let currentUserId = "hi"
-
-
-function setCurrentUserId(){ //this is probably unnecessary now since fillUsersDropdown() includes id
-    let currentUserName = document.querySelector('#users-dropdown').value;
-    fetch(usersEndPoint) // you could fetch the specific user name and return the specific id
-    .then(response => response.json())
-    .then(users => {
-        users.data.forEach(user => {
-            if (user.attributes.name === currentUserName){
-                currentUserId = user.id; 
-            }
-        })
-    })
-}
+// let currentUserId = "hi"
 
 function fillOtherUsersDropDown(){
     const otherUsersDropdown = document.querySelector("#other-users-dropdown");
