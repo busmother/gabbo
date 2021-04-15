@@ -11,7 +11,7 @@ class User {
         User.all.push(this)
     }
 
-    static render(dropdown) {
+    static render(dropdown) { // update method to accept an array rather than use all users
         for (let i = 0; i < this.all.length; i++) {
             let optn = this.all[i].name;
             var el = document.createElement("option");

@@ -14,8 +14,7 @@ class UsersApi {
         })
     }
 
-    static createUser(){
-        const newUserName = document.querySelector(`.new-user-compose-area`)
+    static createUser(newUserName){
         const configurationObject = {
             method: "POST",
             headers: {
@@ -24,14 +23,22 @@ class UsersApi {
             },
 
             body: JSON.stringify({
-                "name": name,
+                "name": newUserName,
             })
         }
         fetch(this.baseUrl, configurationObject)
         .then(data=>{return data.json()})
         .then(
             data => {
-                // set current user ?
+                console.log("data = ", data)
+                document.querySelector('.current-user').innerHTML = "The current user is "+data.name;
+                // add name to usersDropdown
+                var el = document.createElement("option");
+                el.id = data.id;
+                el.value = data.name;
+                el.innerText = data.name;
+                document.querySelector(`#users-dropdown`).add(el, null);
+                User.fillOtherUsersDropdown();
             })
             .catch(error=>console.log(error));
     }
