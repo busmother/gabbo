@@ -6,5 +6,7 @@ class User {
         this.name = name
     }
 
-    
+    //setCurrentUserName ?
+    //setCurrentUserId ?
+    //fillOtherUsersDropdown ?
 }

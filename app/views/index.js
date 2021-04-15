@@ -1,5 +1,3 @@
-const usersEndPoint = "http://localhost:3000/api/v1/users"
-
 function fillUsersDropDown(){
     const usersDropdown = document.querySelector("#users-dropdown")
     let allUsers = []
