@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () =>{
 document.querySelector(".update-user").addEventListener("click", function() {
     setCurrentUserName();
     setCurrentUserId();
-    getChats();
+    ChatApi.getChats();
     fillOtherUsersDropDown();
 })
 
@@ -93,50 +93,32 @@ function fillOtherUsersDropDown(){
 }
 
 
-function clearChats() {
-    const chatMarkup = ``;
-    document.querySelector('.grid-container').innerHTML = chatMarkup;
-}
-
-function getChats() {
-    clearChats()
-    fetch(chatsEndPoint) //update the serializer function so it filters chats
-    .then(response => response.json())
-    .then(chats => {
-        chats.data.forEach(chat => {
-            const chatWindow = new Chat({id: chat.id, 
-                sender: chat.attributes.sender, 
-                recipient: chat.attributes.recipient, 
-                messages: chat.attributes.messages}) //new 
-                console.log("chatWindow = ", chatWindow.element)
-                chatWindow.render();
-                chatWindow.attachToDom();
-        //  renderChat(chat);
-        });
-    })
- }
-
-// function renderChat(chat){
-//     if ((chat.attributes.sender_id.toString() === currentUserId.toString()) || (chat.attributes.recipient_id.toString() === currentUserId.toString())){ 
-//         const chatWindow = document.createElement("div")
-//         const chatMarkup =`
-//             <div class = "chat", id = "chat-${chat.id}">
-//                 <h3>Chat between ${chat.attributes.recipient.name} and ${chat.attributes.sender.name}</h3>
-//                 <div class = "messages">
-//                     <br><br><br>
-//                 </div>
-//                 <br><br>
-//                 <form method="post" class = "chat-form-chat-${chat.id}">
-//                     <input class="message-compose-area" id = "chat-form-chat-${chat.id}" type="text" name="body"></input><br><br><br>
-//                     <input type="submit" value="Gab" class="send-message" id= "gab-button-${chat.id}">  </input>
-//                 </form>
-//             </div>`;
-//         chatWindow.innerHTML += chatMarkup;
-//         document.querySelector('.grid-container').append(chatWindow);
-//         addGabButtonEvent(chat.id);
-//         getMessages(chat);
-//     }
+// function clearChats() { //might not need, keeping here for now
+//     const chatMarkup = ``;
+//     document.querySelector('.grid-container').innerHTML = chatMarkup;
 // }
+
+ function createChat(){
+    const dropdown = document.querySelector(`#other-users-dropdown`)
+    const recipient_id = dropdown.options[dropdown.selectedIndex].id;
+    console.log("you want to start a chat between",currentUserId, "and", recipient_id)
+    const configurationObject = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+
+        body: JSON.stringify({ 
+            "sender_id": currentUserId,
+            "recipient_id": recipient_id,
+        })
+    }
+    fetch(`http://localhost:3000/api/v1/chats`, configurationObject)
+    .then(data=>{return data.json()})
+    .catch(error=>console.log(error))
+    getChats()
+}
  
 function getMessages(chat){
     chat.messages.forEach(message => {
@@ -210,24 +192,3 @@ function createUser(name){
     fillOtherUsersDropDown();
 }
 
-function createChat(){
-    const dropdown = document.querySelector(`#other-users-dropdown`)
-    const recipient_id = dropdown.options[dropdown.selectedIndex].id;
-    console.log("you want to start a chat between",currentUserId, "and", recipient_id)
-    const configurationObject = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-
-        body: JSON.stringify({ 
-            "sender_id": currentUserId,
-            "recipient_id": recipient_id,
-        })
-    }
-    fetch(`http://localhost:3000/api/v1/chats`, configurationObject)
-    .then(data=>{return data.json()})
-    .catch(error=>console.log(error))
-    getChats()
-}
