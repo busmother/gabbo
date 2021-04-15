@@ -104,37 +104,38 @@ function getChats() {
     .then(response => response.json())
     .then(chats => {
         chats.data.forEach(chat => {
-            debugger
-            new Chat({id: chat.id, 
-                sender_id: chat.attributes.sender_id, 
-                recipient_id: chat.attributes.recipient_id, 
-                messages: chat.attributes.messages}) //new - putting this in the console doesn't work tho
-         renderChat(chat);
+            const chatWindow = new Chat({id: chat.id, 
+                sender: chat.attributes.sender, 
+                recipient: chat.attributes.recipient, 
+                messages: chat.attributes.messages}) //new 
+                console.log("chatWindow = ", chatWindow)
+                chatWindow.attachToDom
+        //  renderChat(chat);
         });
     })
  }
 
-function renderChat(chat){
-    if ((chat.attributes.sender_id.toString() === currentUserId.toString()) || (chat.attributes.recipient_id.toString() === currentUserId.toString())){ 
-        const chatWindow = document.createElement("div")
-        const chatMarkup =`
-            <div class = "chat", id = "chat-${chat.id}">
-                <h3>Chat between ${chat.attributes.recipient.name} and ${chat.attributes.sender.name}</h3>
-                <div class = "messages">
-                    <br><br><br>
-                </div>
-                <br><br>
-                <form method="post" class = "chat-form-chat-${chat.id}">
-                    <input class="message-compose-area" id = "chat-form-chat-${chat.id}" type="text" name="body"></input><br><br><br>
-                    <input type="submit" value="Gab" class="send-message" id= "gab-button-${chat.id}">  </input>
-                </form>
-            </div>`;
-        chatWindow.innerHTML += chatMarkup;
-        document.querySelector('.grid-container').append(chatWindow);
-        addGabButtonEvent(chat.id);
-        getMessages(chat);
-    }
-}
+// function renderChat(chat){
+//     if ((chat.attributes.sender_id.toString() === currentUserId.toString()) || (chat.attributes.recipient_id.toString() === currentUserId.toString())){ 
+//         const chatWindow = document.createElement("div")
+//         const chatMarkup =`
+//             <div class = "chat", id = "chat-${chat.id}">
+//                 <h3>Chat between ${chat.attributes.recipient.name} and ${chat.attributes.sender.name}</h3>
+//                 <div class = "messages">
+//                     <br><br><br>
+//                 </div>
+//                 <br><br>
+//                 <form method="post" class = "chat-form-chat-${chat.id}">
+//                     <input class="message-compose-area" id = "chat-form-chat-${chat.id}" type="text" name="body"></input><br><br><br>
+//                     <input type="submit" value="Gab" class="send-message" id= "gab-button-${chat.id}">  </input>
+//                 </form>
+//             </div>`;
+//         chatWindow.innerHTML += chatMarkup;
+//         document.querySelector('.grid-container').append(chatWindow);
+//         addGabButtonEvent(chat.id);
+//         getMessages(chat);
+//     }
+// }
  
 function getMessages(chat){
     chat.attributes.messages.forEach(message => {

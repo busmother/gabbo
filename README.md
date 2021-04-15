@@ -1,24 +1,24 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Gabbo is a basic chat app built with a Javascript front end and Ruby on Rails back end. Gabbo uses a dropdown user option instead of user authentication, which begs the question - who are we really talking to, and why?
 
-Things you may want to cover:
+Getting started:
+To run this app, clone the repo and run 'bundle install'. Then, run 'rails s' to start a server. You should see the app running on 'localhost:3000'.
 
-* Ruby version
+Prerequisites:
+You will need to have Ruby installed on your machine.
 
-* System dependencies
+Built with:
+-Ruby on Rails, our web framework
+-ActiveRecord, our ORM
+-Json API Serializer
+-CORS
 
-* Configuration
+Contributing:
+Contributions are welcome! Feel free to fork, clone, and submit a push request.
 
-* Database creation
+Versioning:
+Version 1
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Authors:
+© @busmother
