@@ -38,10 +38,18 @@ class Chat {
         return this.element
     }
 
-    attachToDom(){
+    attachToDom(){ 
         Chat.container.append(this.render());
-        addGabButtonEvent(this.id)
+        Chat.addGabButtonEvent(this.id)
         Chat.getMessages(this) // argument different from original
+    }
+
+   static addGabButtonEvent(id){ 
+    document.querySelector(`.chat-form-chat-${id}`).addEventListener("submit", function(e){
+        e.preventDefault();
+        const messageInput = document.querySelector(`#chat-form-chat-${id}`).value
+        ChatsApi.createMessage(messageInput, id);
+        });
     }
 
     static clearChats() { //might be unnecessary, we'll see!

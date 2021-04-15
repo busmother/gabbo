@@ -91,33 +91,13 @@ function fillOtherUsersDropDown(){
     })
 }
 
-// function createMessage(body, chat_id){ //was postMessage
-//     const configurationObject = {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json",
-//             "Accept": "application/json"
-//         },
-
-//         body: JSON.stringify({
-//             "chat_id": chat_id,
-//             "user_id": currentUserId,
-//             "body": body
-//         })
-//     }
-//     fetch(`http://localhost:3000/api/v1/chats/${chat_id}/messages`, configurationObject)
-//     .then(data=>{return data.json()})
-//     .catch(error=>console.log(error))
-//     ChatsApi.getChats();
+// function addGabButtonEvent(id){ 
+//     document.querySelector(`.chat-form-chat-${id}`).addEventListener("submit", function(e){
+//         e.preventDefault();
+//         const messageInput = document.querySelector(`#chat-form-chat-${id}`).value
+//         ChatsApi.createMessage(messageInput, id);
+//     });
 // }
-
-function addGabButtonEvent(id){ 
-    document.querySelector(`.chat-form-chat-${id}`).addEventListener("submit", function(e){
-        e.preventDefault();
-        const messageInput = document.querySelector(`#chat-form-chat-${id}`).value
-        ChatsApi.createMessage(messageInput, id);
-    });
-}
 
 function createUser(name){
     const configurationObject = {
