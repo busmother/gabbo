@@ -1,27 +1,7 @@
-function fillUsersDropDown(){
-    const usersDropdown = document.querySelector("#users-dropdown")
-    let allUsers = []
-    let allUsersIds = []
-    fetch(usersEndPoint)
-    .then(response => response.json())
-    .then(users =>{
-        users.data.forEach(user =>{
-            allUsers.push(user.attributes.name);
-            allUsersIds.push(user.id);
-        })
-        for (let i = 0; i < allUsers.length; i++) {
-            let optn = allUsers[i];
-            var el = document.createElement("option");
-            el.textContent = optn;
-            el.value = optn;
-            el.id = allUsersIds[i]
-            usersDropdown.add(el, null);
-        }
-    });
-}
+
 
 document.addEventListener('DOMContentLoaded', () =>{
-    fillUsersDropDown();
+    UsersApi.getUsers(); //used to be fillUsersDropdown()
 })
 
 document.querySelector(".update-user").addEventListener("click", function() {
@@ -51,7 +31,7 @@ function setCurrentUserName(){
 }
 
 
-function setCurrentUserId(){ //this is probably unnecessary now since fillUsersDropDown() includes id
+function setCurrentUserId(){ //this is probably unnecessary now since fillUsersDropdown() includes id
     let currentUserName = document.querySelector('#users-dropdown').value;
     fetch(usersEndPoint) // you could fetch the specific user name and return the specific id
     .then(response => response.json())
@@ -113,7 +93,7 @@ function createUser(name){
     for (i = length-1; i >=0; i--){
         select.options[i] = null;
     }
-    fillUsersDropDown();
+    fillUsersDropdown();
     fillOtherUsersDropDown();
 }
 

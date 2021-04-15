@@ -8,10 +8,10 @@ class UsersApi {
         .then(json => {
             json["data"].forEach(element => {
                 const user = new User({id: element.id,
-                name: element.id})
+                name: element.attributes.name})
             })
+            User.fillUsersDropdown()
         })
-        fillUsersDropdown()
     }
 
     //static createUser()
