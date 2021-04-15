@@ -91,18 +91,18 @@ function fillOtherUsersDropDown(){
     })
 }
  
-function getMessages(chat){
-    chat.messages.forEach(message => {
-        if (message.user_id == currentUserId){
-            const messageBody = `<div class=current-user-message id = message-user-${message.user_id}>${message.body}</div><br>`;
-            document.querySelector(`#chat-${chat.id} .messages`).innerHTML += messageBody
-        } else {
-            const messageBody = `<div class=other-user-message id = message-user-${message.user_id}>${message.body}</div><br>`;
-            document.querySelector(`#chat-${chat.id} .messages`).innerHTML += messageBody
-        }
+// function getMessages(chat){
+//     chat.messages.forEach(message => {
+//         if (message.user_id == currentUserId){
+//             const messageBody = `<div class=current-user-message id = message-user-${message.user_id}>${message.body}</div><br>`;
+//             document.querySelector(`#chat-${chat.id} .messages`).innerHTML += messageBody
+//         } else {
+//             const messageBody = `<div class=other-user-message id = message-user-${message.user_id}>${message.body}</div><br>`;
+//             document.querySelector(`#chat-${chat.id} .messages`).innerHTML += messageBody
+//         }
         
-    })
-}
+//     })
+// }
 
 function postMessage(body, chat_id){
     const configurationObject = {

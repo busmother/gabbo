@@ -41,11 +41,23 @@ class Chat {
     attachToDom(){
         Chat.container.append(this.render());
         addGabButtonEvent(this.id)
-        getMessages(this) // argument different from original
+        Chat.getMessages(this) // argument different from original
     }
 
     static clearChats() { //might be unnecessary, we'll see!
         const chatMarkup = ``
         document.querySelector('.grid-container').innerHTML = chatMarkup;
+    }
+
+    static getMessages(chat){
+        chat.messages.forEach(message => {
+            if (message.user_id == currentUserId){
+                const messageBody = `<div class=current-user-message id = message-user-${message.user_id}>${message.body}</div><br>`;
+                document.querySelector(`#chat-${chat.id} .messages`).innerHTML += messageBody
+            } else {
+                const messageBody = `<div class=other-user-message id = message-user-${message.user_id}>${message.body}</div><br>`;
+                document.querySelector(`#chat-${chat.id} .messages`).innerHTML += messageBody
+            }
+        })
     }
 }
