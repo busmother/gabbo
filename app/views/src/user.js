@@ -29,25 +29,15 @@ class User {
 
     static fillOtherUsersDropdown(){
         const otherUsersDropdown = document.querySelector(`#other-users-dropdown`);
-        this.setCurrentUser()
-        console.log("current user = ", currentUser)
-        this.render(otherUsersDropdown, this.all);
+        this.render(otherUsersDropdown);
     }
 
-    static currentUser = "hi"
-
-    static setCurrentUser(){
-        let usersDropdown = document.querySelector(`#users-dropdown`)
-        let currentUserId = usersDropdown.options[usersDropdown.selectedIndex].id;
-        let currentUser = ``
-        this.all.forEach(user => {
-            if (user.id === currentUserId){
-                currentUser = user
-            }
-        })
-        document.querySelector('.current-user').innerHTML = "The current user is "+currentUser.name;
-        return currentUser;
+    static setCurrentUserName(){
+        let currentUserName = document.querySelector('#users-dropdown').value;
+        document.querySelector('.current-user').innerHTML = "The current user is "+currentUserName;
     }
 
-    //fillOtherUsersDropdown 
+    //setCurrentUserName ?
+    //setCurrentUserId ?
+    //fillOtherUsersDropdown ?
 }
