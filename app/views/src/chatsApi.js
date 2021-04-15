@@ -3,6 +3,7 @@ class ChatsApi {
     static baseUrl = "http://localhost:3000/api/v1/chats"
 
     static getChats(){
+        Chat.clearChats()
         fetch(this.baseUrl)
         .then(r => r.json())
         .then(json => {
@@ -36,5 +37,25 @@ class ChatsApi {
         .then(data=>{return data.json()})
         .catch(error=>console.log(error))
         this.getChats()
+    }
+
+    static createMessage(body, chat_id){
+        const configurationObject = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+    
+            body: JSON.stringify({
+                "chat_id": chat_id,
+                "user_id": currentUserId,
+                "body": body
+            })
+        }
+        fetch(`http://localhost:3000/api/v1/chats/${chat_id}/messages`, configurationObject)
+        .then(data=>{return data.json()})
+        .catch(error=>console.log(error))
+        ChatsApi.getChats();
     }
 }

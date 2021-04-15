@@ -90,45 +90,32 @@ function fillOtherUsersDropDown(){
         }
     })
 }
- 
-// function getMessages(chat){
-//     chat.messages.forEach(message => {
-//         if (message.user_id == currentUserId){
-//             const messageBody = `<div class=current-user-message id = message-user-${message.user_id}>${message.body}</div><br>`;
-//             document.querySelector(`#chat-${chat.id} .messages`).innerHTML += messageBody
-//         } else {
-//             const messageBody = `<div class=other-user-message id = message-user-${message.user_id}>${message.body}</div><br>`;
-//             document.querySelector(`#chat-${chat.id} .messages`).innerHTML += messageBody
-//         }
-        
-//     })
+
+// function createMessage(body, chat_id){ //was postMessage
+//     const configurationObject = {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json",
+//             "Accept": "application/json"
+//         },
+
+//         body: JSON.stringify({
+//             "chat_id": chat_id,
+//             "user_id": currentUserId,
+//             "body": body
+//         })
+//     }
+//     fetch(`http://localhost:3000/api/v1/chats/${chat_id}/messages`, configurationObject)
+//     .then(data=>{return data.json()})
+//     .catch(error=>console.log(error))
+//     ChatsApi.getChats();
 // }
-
-function postMessage(body, chat_id){
-    const configurationObject = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-
-        body: JSON.stringify({
-            "chat_id": chat_id,
-            "user_id": currentUserId,
-            "body": body
-        })
-    }
-    fetch(`http://localhost:3000/api/v1/chats/${chat_id}/messages`, configurationObject)
-    .then(data=>{return data.json()})
-    .catch(error=>console.log(error))
-    ChatsApi.getChats();
-}
 
 function addGabButtonEvent(id){ 
     document.querySelector(`.chat-form-chat-${id}`).addEventListener("submit", function(e){
         e.preventDefault();
         const messageInput = document.querySelector(`#chat-form-chat-${id}`).value
-        postMessage(messageInput, id);
+        ChatsApi.createMessage(messageInput, id);
     });
 }
 
