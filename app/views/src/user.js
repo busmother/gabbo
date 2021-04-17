@@ -24,7 +24,6 @@ class User {
 
     static fillUsersDropdown(){
         const usersDropdown = document.querySelector(`#users-dropdown`)
-        console.log("this all = ", this.all)
         this.render(usersDropdown, this.all);
     }
 

@@ -10,11 +10,12 @@ class ChatsApi {
         .then(json => {
             json["data"].forEach(element => {
                 const chatWindow = new Chat({id: element.id, 
-                sender: element.attributes.sender, 
-                recipient: element.attributes.recipient, 
-                messages: element.attributes.messages})
+                    sender: element.attributes.sender, 
+                    recipient: element.attributes.recipient, 
+                    messages: element.attributes.messages})
                 chatWindow.render();
                 chatWindow.attachToDom();
+                getMessages(chatWindow); //new
             })
         })
     }
@@ -39,11 +40,10 @@ class ChatsApi {
         .then(data=>{return data.json()})
         .catch(error=>console.log(error))
         this.getChats()
-        console.log("you started another chat")
     }
 
     static createMessage(body, chat_id){
-        currentUserId = User.setCurrentUser().id
+        const currentUserId = User.setCurrentUser().id
         const configurationObject = {
             method: "POST",
             headers: {
@@ -57,7 +57,7 @@ class ChatsApi {
                 "body": body
             })
         }
-        fetch(`http://localhost:3000/api/v1/chats/${chat_id}/messages`, configurationObject)
+        fetch(`http://localhost:3000/api/v1/users/${currentUserId}/chats/${chat_id}/messages`, configurationObject)
         .then(data=>{return data.json()})
         .catch(error=>console.log(error))
         ChatsApi.getChats();

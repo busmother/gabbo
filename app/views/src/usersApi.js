@@ -32,7 +32,6 @@ class UsersApi {
             data => {
                 console.log("data = ", data)
                 document.querySelector('.current-user').innerHTML = "The current user is "+data.name;
-                // add name to usersDropdown
                 var el = document.createElement("option");
                 el.id = data.id;
                 el.value = data.name;
