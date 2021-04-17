@@ -11,7 +11,7 @@ class User {
         User.all.push(this)
     }
 
-    static render(dropdown) { // update method to accept an array rather than use all users
+    static render(dropdown, array) { // update method to accept an array rather than use all users
         for (let i = 0; i < this.all.length; i++) {
             let optn = this.all[i].name;
             var el = document.createElement("option");
@@ -24,12 +24,13 @@ class User {
 
     static fillUsersDropdown(){
         const usersDropdown = document.querySelector(`#users-dropdown`)
+        console.log("this all = ", this.all)
         this.render(usersDropdown, this.all);
     }
 
     static fillOtherUsersDropdown(){
         const otherUsersDropdown = document.querySelector(`#other-users-dropdown`);
-        this.render(otherUsersDropdown);
+        this.render(otherUsersDropdown, this.all);
     }
 
     static setCurrentUser(){
