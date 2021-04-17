@@ -1,7 +1,6 @@
 class Chat {
 
     static all = []
-    // static currentUserChats = []
     static container = document.querySelector(`.grid-container`)
 
     constructor({id, sender, recipient, messages}){
@@ -37,7 +36,7 @@ class Chat {
     attachToDom(){ 
         Chat.container.append(this.render());
         Chat.addGabButtonEvent(this.id)
-        Chat.getMessages(this)
+        // Chat.getMessages(this)
     }
 
    static addGabButtonEvent(id){ 
@@ -48,7 +47,7 @@ class Chat {
         });
     }
 
-    static clearChats() { //might be unnecessary, we'll see!
+    static clearChats() {
         const chatMarkup = ``
         document.querySelector('.grid-container').innerHTML = chatMarkup;
     }

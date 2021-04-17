@@ -15,7 +15,7 @@ class ChatsApi {
                     messages: element.attributes.messages})
                 chatWindow.render();
                 chatWindow.attachToDom();
-                getMessages(chatWindow); //new
+                Chat.getMessages(chatWindow);
             })
         })
     }
@@ -39,10 +39,11 @@ class ChatsApi {
         fetch(`http://localhost:3000/api/v1/users/${currentUserId}/chats`, configurationObject)
         .then(data=>{return data.json()})
         .catch(error=>console.log(error))
-        this.getChats()
+        ChatsApi.getChats()
     }
 
     static createMessage(body, chat_id){
+        // either find the current chat with the id or update the arguments
         const currentUserId = User.setCurrentUser().id
         const configurationObject = {
             method: "POST",
@@ -58,8 +59,9 @@ class ChatsApi {
             })
         }
         fetch(`http://localhost:3000/api/v1/users/${currentUserId}/chats/${chat_id}/messages`, configurationObject)
-        .then(data=>{return data.json()})
+        .then(data=>{return data.json()}) //it returns the info so use that?
         .catch(error=>console.log(error))
+        Chat.clearChats();
         ChatsApi.getChats();
     }
 }

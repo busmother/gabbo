@@ -40,5 +40,7 @@ class UsersApi {
                 User.fillOtherUsersDropdown();
             })
             .catch(error=>console.log(error));
+        Chat.clearChats();
+        User.setCurrentUser(); // does this do anything
     }
 }
