@@ -35,7 +35,7 @@ class ChatsApi {
                 "recipient_id": recipient_id,
             })
         }
-        fetch("http://localhost:3000/api/v1/chats", configurationObject)
+        fetch(`http://localhost:3000/api/v1/users/${currentUserId}/chats`, configurationObject)
         .then(data=>{return data.json()})
         .catch(error=>console.log(error))
         this.getChats()
