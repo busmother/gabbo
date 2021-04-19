@@ -24,25 +24,27 @@ class ChatsApi {
         const dropdown = document.querySelector(`#other-users-dropdown`)
         const recipient_id = dropdown.options[dropdown.selectedIndex].id
         const currentUserId = User.setCurrentUser().id;
-        const configurationObject ={
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-    
-            body: JSON.stringify({ 
-                "sender_id": currentUserId,
-                "recipient_id": recipient_id,
-            })
+        if (recipient_id != currentUserId){
+            const configurationObject ={
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+        
+                body: JSON.stringify({ 
+                    "sender_id": currentUserId,
+                    "recipient_id": recipient_id,
+                })
+            }
+            fetch(`http://localhost:3000/api/v1/users/${currentUserId}/chats`, configurationObject)
+            .then(data=>{return data.json()})
+            .catch(error=>console.log(error))
+            ChatsApi.getChats()
         }
-        fetch(`http://localhost:3000/api/v1/users/${currentUserId}/chats`, configurationObject)
-        .then(data=>{return data.json()})
-        .catch(error=>console.log(error))
-        ChatsApi.getChats()
     }
 
-    static createMessage(body, chat_id){
+    static createMessage(body, chat_id){ // could move this to a message class and then it wouldn't be static
         // either find the current chat with the id or update the arguments
         const currentUserId = User.setCurrentUser().id
         const configurationObject = {

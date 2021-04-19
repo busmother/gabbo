@@ -32,7 +32,7 @@ class User {
         this.render(otherUsersDropdown, this.all);
     }
 
-    static setCurrentUser(){
+    static setCurrentUser(){ //this could be a standard method instead of static if you called it on a User object
         let usersDropdown = document.querySelector(`#users-dropdown`)
         let currentUserId = usersDropdown.options[usersDropdown.selectedIndex].id;
         let currentUser = ``

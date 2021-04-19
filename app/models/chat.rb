@@ -8,6 +8,7 @@ class Chat < ApplicationRecord
 
     validates_uniqueness_of :sender_id, :scope => :recipient_id
 
+
     scope :involving, -> (user) do
         where("chats.sender_id =? OR chats.recipient_id = ?",user.id,user.id)
     end
