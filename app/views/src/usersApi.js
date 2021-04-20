@@ -41,6 +41,6 @@ class UsersApi {
             })
             .catch(error=>console.log(error));
         Chat.clearChats();
-        User.setCurrentUser(); // does this do anything
+        User.setCurrentUser();
     }
 }
