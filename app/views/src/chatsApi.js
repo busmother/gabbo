@@ -40,12 +40,11 @@ class ChatsApi {
             fetch(`http://localhost:3000/api/v1/users/${currentUserId}/chats`, configurationObject)
             .then(data=>{return data.json()})
             .catch(error=>console.log(error))
-            ChatsApi.getChats()
+            this.getChats()
         }
     }
 
-    static createMessage(body, chat_id){ // could move this to a message class and then it wouldn't be static
-        // either find the current chat with the id or update the arguments
+    static createMessage(body, chat_id){
         const currentUserId = User.setCurrentUser().id
         const configurationObject = {
             method: "POST",
@@ -61,9 +60,11 @@ class ChatsApi {
             })
         }
         fetch(`http://localhost:3000/api/v1/users/${currentUserId}/chats/${chat_id}/messages`, configurationObject)
-        .then(data=>{return data.json()}) //it returns the info so use that?
+        .then(data=>{
+            console.log("data", data)
+            return data.json()}) 
         .catch(error=>console.log(error))
         Chat.clearChats();
-        ChatsApi.getChats();
+        this.getChats();
     }
 }
