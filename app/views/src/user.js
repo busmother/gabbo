@@ -11,12 +11,12 @@ class User {
         User.all.push(this)
     }
 
-    static render(dropdown, array) { 
-        for (let i = 0; i < this.all.length; i++) {
-            let optn = this.all[i].name;
+    static renderDropdown(dropdown, array) { 
+        for (let i = 0; i < array.length; i++) {
+            let option = this.all[i].name;
             var el = document.createElement("option");
-            el.textContent = optn;
-            el.value = optn;
+            el.textContent = option;
+            el.value = option;
             el.id = array[i].id
             dropdown.add(el, null);
         }
@@ -24,23 +24,28 @@ class User {
 
     static fillUsersDropdown(){
         const usersDropdown = document.querySelector(`#users-dropdown`)
-        this.render(usersDropdown, this.all);
+        this.renderDropdown(usersDropdown, this.all);
     }
 
     static setOtherUsers(){
         const allUsers = this.all
+        // console.log("allUsers = ", allUsers)
         const currentUserIndex = allUsers.indexOf(this.setCurrentUser())
+        // console.log("currentUserIndex = ", currentUserIndex)
         const otherUsersArray = []
         for (let i = 0; i < allUsers.length; i++){
-            otherUsersArray.push(i === currentUserIndex ? "cheese" : allUsers[i])
+            if (i !== currentUserIndex){
+                otherUsersArray.push(allUsers[i])
+            }
         }
+        // console.log("otherUsersArray = ", otherUsersArray)
         return otherUsersArray
     }
 
     static fillOtherUsersDropdown(){
         const otherUsersDropdown = document.querySelector(`#other-users-dropdown`);
+        this.renderDropdown(otherUsersDropdown, this.setOtherUsers());
         console.log("setOtherUsers = ", this.setOtherUsers())
-        this.render(otherUsersDropdown, this.setOtherUsers());
     }
 
     static setCurrentUser(){ 
