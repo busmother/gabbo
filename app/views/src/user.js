@@ -27,12 +27,23 @@ class User {
         this.render(usersDropdown, this.all);
     }
 
-    static fillOtherUsersDropdown(){
-        const otherUsersDropdown = document.querySelector(`#other-users-dropdown`);
-        this.render(otherUsersDropdown, this.all);
+    static setOtherUsers(){
+        const allUsers = this.all
+        const currentUserIndex = allUsers.indexOf(this.setCurrentUser())
+        const otherUsersArray = []
+        for (let i = 0; i < allUsers.length; i++){
+            otherUsersArray.push(i === currentUserIndex ? "cheese" : allUsers[i])
+        }
+        return otherUsersArray
     }
 
-    static setCurrentUser(){ //this could be a standard method instead of static if you called it on a User object
+    static fillOtherUsersDropdown(){
+        const otherUsersDropdown = document.querySelector(`#other-users-dropdown`);
+        console.log("setOtherUsers = ", this.setOtherUsers())
+        this.render(otherUsersDropdown, this.setOtherUsers());
+    }
+
+    static setCurrentUser(){ 
         let usersDropdown = document.querySelector(`#users-dropdown`)
         let currentUserId = usersDropdown.options[usersDropdown.selectedIndex].id;
         let currentUser = ``

@@ -61,7 +61,6 @@ class ChatsApi {
         }
         fetch(`http://localhost:3000/api/v1/users/${currentUserId}/chats/${chat_id}/messages`, configurationObject)
         .then(data=>{
-            console.log("data", data)
             return data.json()}) 
         .catch(error=>console.log(error))
         Chat.clearChats();
