@@ -13,7 +13,7 @@ class User {
 
     static renderDropdown(dropdown, array) { 
         for (let i = 0; i < array.length; i++) {
-            let option = this.all[i].name;
+            let option = array[i].name;
             var el = document.createElement("option");
             el.textContent = option;
             el.value = option;
@@ -29,23 +29,27 @@ class User {
 
     static setOtherUsers(){
         const allUsers = this.all
-        // console.log("allUsers = ", allUsers)
         const currentUserIndex = allUsers.indexOf(this.setCurrentUser())
-        // console.log("currentUserIndex = ", currentUserIndex)
         const otherUsersArray = []
         for (let i = 0; i < allUsers.length; i++){
             if (i !== currentUserIndex){
                 otherUsersArray.push(allUsers[i])
             }
         }
-        // console.log("otherUsersArray = ", otherUsersArray)
         return otherUsersArray
     }
 
     static fillOtherUsersDropdown(){
         const otherUsersDropdown = document.querySelector(`#other-users-dropdown`);
+        this.clearDropdown(otherUsersDropdown);
         this.renderDropdown(otherUsersDropdown, this.setOtherUsers());
-        console.log("setOtherUsers = ", this.setOtherUsers())
+    }
+
+    static clearDropdown(dropdown){
+        const length = dropdown.options.length
+        for (let i = length-1; i >=0; i--){
+            dropdown.options[i] = null;
+        }
     }
 
     static setCurrentUser(){ 
